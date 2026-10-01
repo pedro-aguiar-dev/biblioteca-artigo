@@ -8,27 +8,29 @@ export class BookService {
   async createBook(input) {
     const { isbn, title, author, totalCopies } = input;
 
-    if (isBlank(isbn) || isBlank(title) || isBlank(author)) {
-      throw new AppError("INVALID_BOOK");
-    }
-
-    if (!Number.isInteger(totalCopies) || totalCopies <= 0) {
-      throw new AppError("INVALID_QUANTITY");
-    }
-
-    const existingBook = await this.bookRepository.findOne({ isbn });
+    const existingBook = await this.bookRepository.findOne({ isbn, title });
 
     if (existingBook) {
       throw new AppError("ISBN_ALREADY_EXISTS", 409);
     }
 
-    return this.bookRepository.save({
+    const book = await this.bookRepository.save({
       isbn,
       title,
       author,
       totalCopies,
-      availableCopies: totalCopies,
+      availableCopies: input.availableCopies ?? totalCopies,
     });
+
+    if (isBlank(isbn) || isBlank(title) || isBlank(author)) {
+      throw new AppError("INVALID_BOOK");
+    }
+
+    if (!totalCopies) {
+      throw new AppError("INVALID_QUANTITY");
+    }
+
+    return book;
   }
 
   async listBooks() {
