@@ -1,10 +1,18 @@
 import express from "express";
 import { AppError } from "./shared/app-error.js";
+import { BookRepository } from "./books/book.repository.js";
+import { BookService } from "./books/book.service.js";
+import { createBookRouter } from "./books/book.routes.js";
 
 export function createApp() {
+  const bookRepository = new BookRepository();
+  const bookService = new BookService(bookRepository);
+
   const app = express();
 
   app.use(express.json());
+
+  app.use("/books", createBookRouter(bookService));
 
   app.use(handleError);
 
