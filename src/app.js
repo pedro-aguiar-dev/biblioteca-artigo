@@ -3,16 +3,22 @@ import { AppError } from "./shared/app-error.js";
 import { BookRepository } from "./books/book.repository.js";
 import { BookService } from "./books/book.service.js";
 import { createBookRouter } from "./books/book.routes.js";
+import { UserRepository } from "./users/user.repository.js";
+import { UserService } from "./users/user.service.js";
+import { createUserRouter } from "./users/user.routes.js";
 
 export function createApp() {
   const bookRepository = new BookRepository();
   const bookService = new BookService(bookRepository);
+  const userRepository = new UserRepository();
+  const userService = new UserService(userRepository);
 
   const app = express();
 
   app.use(express.json());
 
   app.use("/books", createBookRouter(bookService));
+  app.use("/users", createUserRouter(userService));
 
   app.use(handleError);
 
