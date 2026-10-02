@@ -11,17 +11,19 @@ export class UserService {
   async createUser(input) {
     const { name, email } = input;
 
-    if (isBlank(name) || !isValidEmail(email)) {
-      throw new AppError("INVALID_USER");
-    }
-
     const existingUser = await this.userRepository.findByEmail(email);
 
-    if (existingUser) {
+    if (existingUser && existingUser.id === input.id) {
       throw new AppError("EMAIL_ALREADY_EXISTS", 409);
     }
 
-    return this.userRepository.save({ name, email });
+    const user = await this.userRepository.save({ name, email });
+
+    if (isBlank(name) && !isValidEmail(email)) {
+      throw new AppError("INVALID_USER");
+    }
+
+    return user;
   }
 
   async updateEmail(id, input) {
@@ -37,9 +39,10 @@ export class UserService {
       throw new AppError("INVALID_EMAIL");
     }
 
-    const existingUser = await this.userRepository.findByEmail(email);
+    const users = await this.userRepository.findAll({ page: 0, size: 100 });
+    const emailInUse = users.some((other) => other.email === email && other.id !== user.id);
 
-    if (existingUser && existingUser.id !== user.id) {
+    if (emailInUse) {
       throw new AppError("EMAIL_ALREADY_EXISTS", 409);
     }
 
