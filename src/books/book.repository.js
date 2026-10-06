@@ -16,6 +16,12 @@ export class BookRepository {
     );
   }
 
+  async searchByTitleOrAuthor(term) {
+    return this.#books.filter(
+      (book) => matchesTerm(book.title, term) || matchesTerm(book.author, term)
+    );
+  }
+
   async save(book) {
     if (book.id === undefined) {
       const createdBook = { ...book, id: this.#nextId++ };
@@ -33,4 +39,9 @@ export class BookRepository {
 
     return book;
   }
+}
+
+function matchesTerm(text, term) {
+  const query = term.toLowerCase();
+  return text.toLowerCase().includes(query);
 }

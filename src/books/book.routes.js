@@ -13,5 +13,10 @@ export function createBookRouter(bookService) {
     res.json(books);
   });
 
+  router.get("/search", async (req, res) => {
+    const books = await bookService.searchBooks(req.query.q);
+    res.json(books);
+  });
+
   return router;
 }

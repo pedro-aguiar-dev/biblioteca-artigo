@@ -34,6 +34,14 @@ export class BookService {
   async listBooks() {
     return this.bookRepository.findAll();
   }
+
+  async searchBooks(term) {
+    if (isBlank(term)) {
+      throw new AppError("INVALID_SEARCH_TERM");
+    }
+
+    return this.bookRepository.searchByTitleOrAuthor(term);
+  }
 }
 
 function isBlank(value) {
