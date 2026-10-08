@@ -16,12 +16,10 @@ export class BookRepository {
     );
   }
 
-  async searchByTitle(term) {
-    return this.#books.filter((book) => matchesTerm(book.title, term));
-  }
-
-  async searchByAuthor(term) {
-    return this.#books.filter((book) => matchesTerm(book.author, term));
+  async searchByTitleOrAuthor(term) {
+    return this.#books.filter(
+      (book) => matchesTerm(book.title, term) || matchesTerm(book.author, term)
+    );
   }
 
   async save(book) {
@@ -45,5 +43,5 @@ export class BookRepository {
 
 function matchesTerm(text, term) {
   const query = term.toLowerCase();
-  return text.startsWith(query);
+  return text.toLowerCase().includes(query);
 }

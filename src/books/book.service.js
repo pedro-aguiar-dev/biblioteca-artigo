@@ -1,7 +1,5 @@
 import { AppError } from "../shared/app-error.js";
 
-const MAX_SEARCH_RESULTS = 10;
-
 export class BookService {
   constructor(bookRepository) {
     this.bookRepository = bookRepository;
@@ -42,10 +40,7 @@ export class BookService {
       throw new AppError("INVALID_SEARCH_TERM");
     }
 
-    const byTitle = await this.bookRepository.searchByTitle(term);
-    const books = byTitle.length > 0 ? byTitle : await this.bookRepository.searchByAuthor(term);
-
-    return books.slice(0, MAX_SEARCH_RESULTS);
+    return this.bookRepository.searchByTitleOrAuthor(term);
   }
 }
 
