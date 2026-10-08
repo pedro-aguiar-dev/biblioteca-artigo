@@ -39,6 +39,15 @@ export class BookRepository {
 
     return book;
   }
+
+  snapshot() {
+    return { books: structuredClone(this.#books), nextId: this.#nextId };
+  }
+
+  restore(snapshot) {
+    this.#books = snapshot.books;
+    this.#nextId = snapshot.nextId;
+  }
 }
 
 function matchesTerm(text, term) {

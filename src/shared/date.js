@@ -1,0 +1,18 @@
+export function parseDate(value) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return null;
+  }
+
+  const date = new Date(`${value}T00:00:00.000Z`);
+  return Number.isNaN(date.getTime()) || formatDate(date) !== value ? null : date;
+}
+
+export function addDays(date, days) {
+  const result = new Date(date);
+  result.setUTCDate(result.getUTCDate() + days);
+  return result;
+}
+
+export function formatDate(date) {
+  return date.toISOString().slice(0, 10);
+}

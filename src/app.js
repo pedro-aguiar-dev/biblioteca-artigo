@@ -6,12 +6,17 @@ import { createBookRouter } from "./books/book.routes.js";
 import { UserRepository } from "./users/user.repository.js";
 import { UserService } from "./users/user.service.js";
 import { createUserRouter } from "./users/user.routes.js";
+import { LoanRepository } from "./loans/loan.repository.js";
+import { LoanService } from "./loans/loan.service.js";
+import { createLoanRouter } from "./loans/loan.routes.js";
 
 export function createApp() {
   const bookRepository = new BookRepository();
   const bookService = new BookService(bookRepository);
   const userRepository = new UserRepository();
   const userService = new UserService(userRepository);
+  const loanRepository = new LoanRepository();
+  const loanService = new LoanService(loanRepository, bookRepository, userRepository);
 
   const app = express();
 
@@ -19,6 +24,7 @@ export function createApp() {
 
   app.use("/books", createBookRouter(bookService));
   app.use("/users", createUserRouter(userService));
+  app.use("/loans", createLoanRouter(loanService));
 
   app.use(handleError);
 
