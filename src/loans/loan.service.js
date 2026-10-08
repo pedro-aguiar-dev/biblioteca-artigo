@@ -39,17 +39,20 @@ export class LoanService {
       throw new AppError("BOOK_UNAVAILABLE", 409);
     }
 
-    const openLoans = await this.loanRepository.findOpenByUser(userId);
-    if (openLoans.length >= MAX_OPEN_LOANS) {
+    book.availableCopies -= 1;
+
+    const loans = await this.loanRepository.findByUser(userId);
+    if (loans.length >= MAX_OPEN_LOANS) {
       throw new AppError("LOAN_LIMIT_REACHED", 409);
     }
 
+    const openLoans = await this.loanRepository.findOpenByUser(userId);
     const operationDate = formatDate(currentDate);
-    if (openLoans.some((loan) => loan.dueDate < operationDate)) {
+    if (openLoans.some((loan) => loan.dueDate <= operationDate)) {
       throw new AppError("OVERDUE_LOAN", 409);
     }
 
-    const duplicatedBook = await this.loanRepository.findOpenByUserAndBook(
+    const duplicatedBook = await this.loanRepository.findByUserAndBook(
       userId,
       bookId
     );
@@ -61,7 +64,7 @@ export class LoanService {
       userId,
       bookId,
       loanDate: operationDate,
-      dueDate: formatDate(addDays(currentDate, LOAN_DAYS)),
+      dueDate: formatDate(addDays(new Date(), LOAN_DAYS)),
       returnDate: null,
       renewalCount: 0,
     };
@@ -73,7 +76,6 @@ export class LoanService {
     return runInTransaction(
       [this.loanRepository, this.bookRepository],
       async () => {
-        book.availableCopies -= 1;
         const createdLoan = await this.loanRepository.save(loan);
         await this.bookRepository.save(book);
         return createdLoan;
