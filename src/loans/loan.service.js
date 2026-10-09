@@ -121,17 +121,19 @@ export class LoanService {
     }
 
     const operationDate = formatDate(currentDate);
-    if (loan.dueDate < operationDate) {
+    if (loan.dueDate <= operationDate) {
       throw new AppError("OVERDUE_LOAN", 409);
     }
+
+    loan.dueDate = formatDate(addDays(currentDate, 7));
 
     if (loan.renewalCount >= 3) {
       throw new AppError("RENEWAL_LIMIT_REACHED", 409);
     }
 
-    loan.dueDate = formatDate(addDays(parseDate(loan.dueDate), 7));
     loan.renewalCount += 1;
-    return this.loanRepository.save(loan);
+    const book = await this.bookRepository.findOne({ id: loan.bookId });
+    return this.persistLoan(loan, book);
   }
 
   async persistLoan(loan, book) {
