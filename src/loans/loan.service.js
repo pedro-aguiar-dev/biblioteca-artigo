@@ -69,6 +69,40 @@ export class LoanService {
     return this.persistLoan(loan, book);
   }
 
+  async returnLoan(input) {
+    const loanId = parseId(input?.loanId);
+    const currentDate = parseDate(input?.currentDate);
+
+    if (loanId === null || currentDate === null) {
+      throw new AppError("INVALID_RETURN", 400);
+    }
+
+    const loan = await this.loanRepository.findById(loanId);
+    if (!loan) {
+      throw new AppError("LOAN_NOT_FOUND", 404);
+    }
+
+    if (loan.returnDate) {
+      throw new AppError("LOAN_ALREADY_RETURNED", 409);
+    }
+
+    const book = await this.bookRepository.findOne({ id: loan.bookId });
+    if (!book) {
+      throw new AppError("BOOK_NOT_FOUND", 404);
+    }
+
+    return runInTransaction(
+      [this.loanRepository, this.bookRepository],
+      async () => {
+        loan.returnDate = formatDate(currentDate);
+        book.availableCopies += 1;
+        const returnedLoan = await this.loanRepository.save(loan);
+        await this.bookRepository.save(book);
+        return returnedLoan;
+      }
+    );
+  }
+
   async persistLoan(loan, book) {
     return runInTransaction(
       [this.loanRepository, this.bookRepository],

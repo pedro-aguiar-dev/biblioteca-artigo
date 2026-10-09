@@ -6,6 +6,10 @@ export class LoanRepository {
     return [...this.#loans];
   }
 
+  async findById(id) {
+    return this.#loans.find((loan) => loan.id === id) ?? null;
+  }
+
   async findByUser(userId) {
     return this.#loans.filter((loan) => loan.userId === userId);
   }
