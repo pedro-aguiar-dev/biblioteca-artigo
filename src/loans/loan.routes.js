@@ -32,5 +32,18 @@ export function createLoanRouter(loanService) {
     }
   });
 
+  router.post("/:id/renew", async (req, res, next) => {
+    try {
+      res.json(
+        await loanService.renewLoan({
+          loanId: req.params.id,
+          currentDate: req.body?.currentDate,
+        })
+      );
+    } catch (error) {
+      next(error);
+    }
+  });
+
   return router;
 }

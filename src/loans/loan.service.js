@@ -103,6 +103,37 @@ export class LoanService {
     );
   }
 
+  async renewLoan(input) {
+    const loanId = parseId(input?.loanId);
+    const currentDate = parseDate(input?.currentDate);
+
+    if (loanId === null || currentDate === null) {
+      throw new AppError("INVALID_RENEWAL", 400);
+    }
+
+    const loan = await this.loanRepository.findById(loanId);
+    if (!loan) {
+      throw new AppError("LOAN_NOT_FOUND", 404);
+    }
+
+    if (loan.returnDate) {
+      throw new AppError("LOAN_ALREADY_RETURNED", 409);
+    }
+
+    const operationDate = formatDate(currentDate);
+    if (loan.dueDate < operationDate) {
+      throw new AppError("OVERDUE_LOAN", 409);
+    }
+
+    if (loan.renewalCount >= 3) {
+      throw new AppError("RENEWAL_LIMIT_REACHED", 409);
+    }
+
+    loan.dueDate = formatDate(addDays(parseDate(loan.dueDate), 7));
+    loan.renewalCount += 1;
+    return this.loanRepository.save(loan);
+  }
+
   async persistLoan(loan, book) {
     return runInTransaction(
       [this.loanRepository, this.bookRepository],
