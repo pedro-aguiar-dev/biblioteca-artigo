@@ -82,25 +82,24 @@ export class LoanService {
       throw new AppError("LOAN_NOT_FOUND", 404);
     }
 
-    if (loan.returnDate) {
-      throw new AppError("LOAN_ALREADY_RETURNED", 409);
-    }
-
     const book = await this.bookRepository.findOne({ id: loan.bookId });
     if (!book) {
       throw new AppError("BOOK_NOT_FOUND", 404);
     }
 
-    return runInTransaction(
-      [this.loanRepository, this.bookRepository],
-      async () => {
-        loan.returnDate = formatDate(currentDate);
-        book.availableCopies += 1;
-        const returnedLoan = await this.loanRepository.save(loan);
-        await this.bookRepository.save(book);
-        return returnedLoan;
-      }
-    );
+    book.availableCopies += 1;
+
+    if (loan.returnDate) {
+      throw new AppError("LOAN_ALREADY_RETURNED", 409);
+    }
+
+    validateLoanIsNotOverdue(loan, formatDate(currentDate));
+
+    loan.returnDate = formatDate(currentDate);
+    const returnedLoan = await this.loanRepository.save(loan);
+    book.availableCopies = book.totalCopies;
+    await this.bookRepository.save(book);
+    return returnedLoan;
   }
 
   async persistLoan(loan, book) {
@@ -119,4 +118,10 @@ export class LoanService {
 function parseId(value) {
   const id = Number(value);
   return Number.isInteger(id) && id > 0 ? id : null;
+}
+
+function validateLoanIsNotOverdue(loan, currentDate) {
+  if (loan.dueDate < currentDate) {
+    throw new AppError("OVERDUE_LOAN", 409);
+  }
 }
