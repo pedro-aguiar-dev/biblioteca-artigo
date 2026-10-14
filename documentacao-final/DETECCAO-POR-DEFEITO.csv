@@ -1,0 +1,26 @@
+﻿pr;defeito;titulo;dificuldade;chatgpt_deteccoes;claude_deteccoes;gemini_deteccoes
+PR01;PR01-01;"Verificação de ISBN condicionada também ao título";Média;5;5;5
+PR01;PR01-02;"Persistência realizada antes de todas as validações";Alta;5;5;5
+PR01;PR01-03;"Cliente consegue definir a disponibilidade inicial";Média;5;5;5
+PR01;PR01-04;"Validação de quantidade baseada apenas em truthiness";Baixa;5;5;5
+PR02;PR02-02;"Regra de atualização reutilizada incorretamente na criação";Média;5;5;5
+PR02;PR02-03;"Usuário salvo antes da validação";Alta;5;5;5
+PR02;PR02-04;"Validação rejeita somente quando nome e e-mail são inválidos ao mesmo tempo";Baixa;5;5;5
+PR02;PR02-05;"Verificação de duplicidade baseada em listagem paginada";Alta;5;5;5
+PR03;PR03-01;"Apenas o termo pesquisado é normalizado para minúsculas";Baixa;5;5;5
+PR03;PR03-03;"Autor é pesquisado somente se nenhum título for encontrado";Média;5;5;5
+PR03;PR03-04;"Correspondência parcial implementada apenas como prefixo";Baixa;5;5;5
+PR03;PR03-06;"Resultados limitados a uma quantidade fixa (substituto do PR03-05)";Média (estimativa do assistente, aceita pelo pesquisador);5;5;5
+PR04;PR04-01;"Estoque decrementado antes de concluir todas as validações";Alta;5;5;5
+PR04;PR04-02;"Limite calculado incluindo empréstimos já devolvidos";Alta;5;5;5
+PR04;PR04-03;"Livro que vence hoje é tratado como atrasado";Baixa;5;5;5
+PR04;PR04-04;"Histórico do mesmo livro impede novo empréstimo";Alta;5;5;5
+PR04;PR04-05;"Uso do relógio da máquina em vez da data controlada da operação";Alta;5;5;5
+PR05;PR05-01;"Estoque incrementado antes de verificar devolução duplicada";Alta;5;5;5
+PR05;PR05-02;"Empréstimo atrasado não pode ser devolvido";Média;5;5;5
+PR05;PR05-03;"Devolução restaura todo o estoque do livro";Média;5;5;5
+PR05;PR05-05;"Atualização do empréstimo e do estoque sem atomicidade";Alta;5;5;0
+PR06;PR06-01;"Renovação calculada a partir da data atual";Média;5;5;5
+PR06;PR06-02;"Vencimento modificado antes de validar o limite";Alta;5;5;0
+PR06;PR06-03;"Empréstimo que vence hoje é considerado atrasado";Baixa;5;5;5
+PR06;PR06-05;"Helper compartilhado altera estoque durante renovação";Alta;5;5;5
