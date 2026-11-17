@@ -2,12 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 
-const require = createRequire(import.meta.url);
+const require = createRequire(path.join(process.cwd(), "experimento", "package.json"));
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
   WidthType, AlignmentType, BorderStyle, Header, Footer, PageNumber, TableOfContents,
   PageBreak, ShadingType, VerticalAlign
-} = require("C:/diversos/biblioteca-experimento/node_modules/docx");
+} = require("docx");
 
 const dir = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(.:)/, "$1"));
 const docs = [

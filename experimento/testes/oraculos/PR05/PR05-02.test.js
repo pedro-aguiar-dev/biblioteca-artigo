@@ -1,0 +1,2 @@
+import { test } from "node:test"; import assert from "node:assert/strict"; import { novoServicoDeEmprestimos, livroValido, usuarioValido } from "../../apoio.js";
+test("PR05-02: atrasado pode ser devolvido",async()=>{const c=novoServicoDeEmprestimos(),u=await c.userService.createUser(usuarioValido()),b=await c.bookService.createBook(livroValido()),l=await c.loanService.createLoan({userId:u.id,bookId:b.id,currentDate:"2026-01-01"});assert.equal((await c.loanService.returnLoan({loanId:l.id,currentDate:"2026-02-01"})).returnDate,"2026-02-01")});

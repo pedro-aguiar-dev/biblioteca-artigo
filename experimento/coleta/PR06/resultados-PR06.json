@@ -1,0 +1,526 @@
+{
+  "pr": "PR06",
+  "geradoEm": "2026-10-14T19:10:06.157Z",
+  "execucoes": [
+    {
+      "id": "R02",
+      "modelo": "chatgpt",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R06",
+      "modelo": "chatgpt",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R01",
+      "modelo": "chatgpt",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R05",
+      "modelo": "chatgpt",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R04",
+      "modelo": "chatgpt",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R03",
+      "modelo": "claude",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R13",
+      "modelo": "claude",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R14",
+      "modelo": "claude",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R11",
+      "modelo": "claude",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R15",
+      "modelo": "claude",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-02",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R07",
+      "modelo": "gemini",
+      "execucao": 1,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R08",
+      "modelo": "gemini",
+      "execucao": 2,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R12",
+      "modelo": "gemini",
+      "execucao": 3,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R09",
+      "modelo": "gemini",
+      "execucao": 4,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R10",
+      "modelo": "gemini",
+      "execucao": 5,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR06-01",
+        "PR06-03",
+        "PR06-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    }
+  ],
+  "porModelo": [
+    {
+      "modelo": "chatgpt",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    },
+    {
+      "modelo": "claude",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    },
+    {
+      "modelo": "gemini",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 0.75,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 0.8571428571428571,
+        "desvio": 0
+      },
+      "tp": 15,
+      "fp": 0,
+      "fn": 5,
+      "micro": {
+        "precision": 1,
+        "recall": 0.75,
+        "f1": 0.8571428571428571
+      }
+    }
+  ],
+  "porDefeito": [
+    {
+      "defeito": "PR06-01",
+      "titulo": "Renovação calculada a partir da data atual",
+      "dificuldade": "Média",
+      "categoria": "Regra temporal",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR06-02",
+      "titulo": "Vencimento modificado antes de validar o limite",
+      "dificuldade": "Alta",
+      "categoria": "Mutabilidade / efeito colateral",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "deteccoes": 0,
+          "frequencia": 0
+        }
+      }
+    },
+    {
+      "defeito": "PR06-03",
+      "titulo": "Empréstimo que vence hoje é considerado atrasado",
+      "dificuldade": "Baixa",
+      "categoria": "Boundary temporal",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR06-05",
+      "titulo": "Helper compartilhado altera estoque durante renovação",
+      "dificuldade": "Alta",
+      "categoria": "Reutilização / efeito colateral indireto",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    }
+  ]
+}

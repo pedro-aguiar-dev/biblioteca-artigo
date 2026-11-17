@@ -1,0 +1,73 @@
+diff --git a/src/books/book.repository.js b/src/books/book.repository.js
+index 10e9fc4..25add5f 100644
+--- a/src/books/book.repository.js
++++ b/src/books/book.repository.js
+@@ -16,6 +16,14 @@ export class BookRepository {
+     );
+   }
+ 
++  async searchByTitle(term) {
++    return this.#books.filter((book) => matchesTerm(book.title, term));
++  }
++
++  async searchByAuthor(term) {
++    return this.#books.filter((book) => matchesTerm(book.author, term));
++  }
++
+   async save(book) {
+     if (book.id === undefined) {
+       const createdBook = { ...book, id: this.#nextId++ };
+@@ -34,3 +42,8 @@ export class BookRepository {
+     return book;
+   }
+ }
++
++function matchesTerm(text, term) {
++  const query = term.toLowerCase();
++  return text.startsWith(query);
++}
+diff --git a/src/books/book.routes.js b/src/books/book.routes.js
+index de56337..589a3bf 100644
+--- a/src/books/book.routes.js
++++ b/src/books/book.routes.js
+@@ -13,5 +13,10 @@ export function createBookRouter(bookService) {
+     res.json(books);
+   });
+ 
++  router.get("/search", async (req, res) => {
++    const books = await bookService.searchBooks(req.query.q);
++    res.json(books);
++  });
++
+   return router;
+ }
+diff --git a/src/books/book.service.js b/src/books/book.service.js
+index 56ac362..fa2b26a 100644
+--- a/src/books/book.service.js
++++ b/src/books/book.service.js
+@@ -1,5 +1,7 @@
+ import { AppError } from "../shared/app-error.js";
+ 
++const MAX_SEARCH_RESULTS = 10;
++
+ export class BookService {
+   constructor(bookRepository) {
+     this.bookRepository = bookRepository;
+@@ -34,6 +36,17 @@ export class BookService {
+   async listBooks() {
+     return this.bookRepository.findAll();
+   }
++
++  async searchBooks(term) {
++    if (isBlank(term)) {
++      throw new AppError("INVALID_SEARCH_TERM");
++    }
++
++    const byTitle = await this.bookRepository.searchByTitle(term);
++    const books = byTitle.length > 0 ? byTitle : await this.bookRepository.searchByAuthor(term);
++
++    return books.slice(0, MAX_SEARCH_RESULTS);
++  }
+ }
+ 
+ function isBlank(value) {

@@ -1,0 +1,512 @@
+{
+  "pr": "PR06",
+  "classificado_por": "assistente (Codex), às cegas — mapa-cego.json não consultado",
+  "data": "2026-10-09",
+  "protocolo": "coleta/protocolo-analise.md (versão fixada em 2026-10-01)",
+  "revisao_pesquisador": {
+    "data": "2026-10-14",
+    "resultado": "Pesquisador aprovou integralmente o documento de revisão; revisao-PR06.docx lido com 55 achados e nenhuma decisão divergente. Nenhuma classificação foi alterada."
+  },
+  "respostas": {
+    "R01": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R02": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        },
+        {
+          "n": 4,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        }
+      ]
+    },
+    "R03": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R04": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R05": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 2,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R06": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R07": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R08": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 2,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 3,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R09": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R10": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 2,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 3,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R11": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R12": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 2,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 3,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R13": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R14": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 3,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    },
+    "R15": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A renovação soma sete dias a currentDate, não ao vencimento atual.",
+          "classificacao": "TP",
+          "defeito": "PR06-01",
+          "parcial": false,
+          "justificativa": "Identifica a base temporal errada e a perda de dias restantes."
+        },
+        {
+          "n": 2,
+          "trecho": "dueDate é alterado antes de verificar o limite de três renovações.",
+          "classificacao": "TP",
+          "defeito": "PR06-02",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o estado alterado na quarta tentativa rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= bloqueia a renovação no próprio dia do vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR06-03",
+          "parcial": false,
+          "justificativa": "Identifica a condição de fronteira e a comparação estrita exigida por RN07."
+        },
+        {
+          "n": 4,
+          "trecho": "renewLoan chama persistLoan, que decrementa availableCopies.",
+          "classificacao": "TP",
+          "defeito": "PR06-05",
+          "parcial": false,
+          "justificativa": "Acompanha o helper e identifica o efeito indireto proibido sobre o estoque."
+        }
+      ]
+    }
+  }
+}

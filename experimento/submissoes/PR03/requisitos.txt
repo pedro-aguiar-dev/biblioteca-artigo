@@ -1,0 +1,7 @@
+RF03 Consultar acervo: o sistema deve permitir a pesquisa de livros por título ou autor.
+- CA10 A pesquisa deve aceitar correspondência parcial.
+- CA11 A pesquisa não deve diferenciar letras maiúsculas e minúsculas.
+- CA12 Todos os livros compatíveis devem ser retornados.
+- CA13 Uma pesquisa sem correspondência deve retornar uma lista vazia.
+
+Modelo de dados (Livro): identificador, ISBN, título, autor, quantidade total e quantidade disponível.

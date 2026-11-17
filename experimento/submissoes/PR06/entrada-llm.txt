@@ -1,0 +1,134 @@
+Atue como revisor de código.
+
+Analise o Pull Request abaixo considerando os requisitos e regras de negócio fornecidos.
+
+Identifique defeitos funcionais introduzidos pelas alterações. Considere como defeito apenas algo que possa gerar comportamento incorreto ou violar um requisito.
+
+Não reporte questões de estilo, nomenclatura ou refatorações opcionais.
+
+O Pull Request pode conter zero ou mais defeitos.
+
+Para cada defeito encontrado, informe:
+- localização;
+- descrição do problema;
+- comportamento esperado;
+- comportamento atual;
+- requisito relacionado.
+
+Requisitos da funcionalidade:
+RF06 Renovar empréstimo
+O sistema deve permitir a renovação de um empréstimo em aberto.
+● CA27 Cada renovação deve acrescentar 7 dias à data prevista atual.
+● CA28 O contador de renovações deve aumentar em uma unidade.
+● CA29 A quantidade disponível não deve ser alterada.
+● CA30 Empréstimos atrasados não podem ser renovados.
+● CA31 Uma quarta renovação deve ser rejeitada.
+● CA32 Uma renovação rejeitada não deve modificar a data nem o contador.
+
+RN02 Cada renovação acrescenta 7 dias à data prevista atual.
+RN03 Um empréstimo pode ser renovado no máximo três vezes.
+RN07 Um empréstimo está atrasado quando a data prevista é anterior à data da operação.
+RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+
+Modelo mínimo de dados
+Livro: identificador, ISBN, título, autor, quantidade total e quantidade disponível.
+Empréstimo: identificador, usuário, livro, data do empréstimo, data prevista, data de devolução e quantidade de renovações.
+
+Descrição do Pull Request:
+Este Pull Request implementa a renovação de empréstimos por meio de POST /loans/:id/renew e mantém os endpoints existentes de empréstimos e devoluções.
+
+Diff:
+diff --git a/src/loans/loan.routes.js b/src/loans/loan.routes.js
+index c71c3e4..d00307d 100644
+--- a/src/loans/loan.routes.js
++++ b/src/loans/loan.routes.js
+@@ -23,14 +23,27 @@ export function createLoanRouter(loanService) {
+     try {
+       res.json(
+         await loanService.returnLoan({
+           loanId: req.params.id,
+           currentDate: req.body?.currentDate,
+         })
+       );
+     } catch (error) {
+       next(error);
+     }
+   });
+ 
++  router.post("/:id/renew", async (req, res, next) => {
++    try {
++      res.json(
++        await loanService.renewLoan({
++          loanId: req.params.id,
++          currentDate: req.body?.currentDate,
++        })
++      );
++    } catch (error) {
++      next(error);
++    }
++  });
++
+   return router;
+ }
+diff --git a/src/loans/loan.service.js b/src/loans/loan.service.js
+index 7fdd9c9..96b367f 100644
+--- a/src/loans/loan.service.js
++++ b/src/loans/loan.service.js
+@@ -94,24 +94,57 @@ export class LoanService {
+     return runInTransaction(
+       [this.loanRepository, this.bookRepository],
+       async () => {
+         loan.returnDate = formatDate(currentDate);
+         book.availableCopies += 1;
+         const returnedLoan = await this.loanRepository.save(loan);
+         await this.bookRepository.save(book);
+         return returnedLoan;
+       }
+     );
+   }
+ 
++  async renewLoan(input) {
++    const loanId = parseId(input?.loanId);
++    const currentDate = parseDate(input?.currentDate);
++
++    if (loanId === null || currentDate === null) {
++      throw new AppError("INVALID_RENEWAL", 400);
++    }
++
++    const loan = await this.loanRepository.findById(loanId);
++    if (!loan) {
++      throw new AppError("LOAN_NOT_FOUND", 404);
++    }
++
++    if (loan.returnDate) {
++      throw new AppError("LOAN_ALREADY_RETURNED", 409);
++    }
++
++    const operationDate = formatDate(currentDate);
++    if (loan.dueDate <= operationDate) {
++      throw new AppError("OVERDUE_LOAN", 409);
++    }
++
++    loan.dueDate = formatDate(addDays(currentDate, 7));
++
++    if (loan.renewalCount >= 3) {
++      throw new AppError("RENEWAL_LIMIT_REACHED", 409);
++    }
++
++    loan.renewalCount += 1;
++    const book = await this.bookRepository.findOne({ id: loan.bookId });
++    return this.persistLoan(loan, book);
++  }
++
+   async persistLoan(loan, book) {
+     return runInTransaction(
+       [this.loanRepository, this.bookRepository],
+       async () => {
+         book.availableCopies -= 1;
+         const createdLoan = await this.loanRepository.save(loan);
+         await this.bookRepository.save(book);
+         return createdLoan;
+       }
+     );
+   }
+ }

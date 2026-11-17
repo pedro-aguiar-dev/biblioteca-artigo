@@ -1,0 +1,700 @@
+{
+  "pr": "PR04",
+  "classificado_por": "assistente (Codex), às cegas — mapa-cego.json não consultado",
+  "data": "2026-10-09",
+  "protocolo": "coleta/protocolo-analise.md (versão fixada em 2026-10-01)",
+  "revisao_pesquisador": {
+    "data": "2026-10-09",
+    "resultado": "Pesquisador aprovou integralmente o documento de revisão; revisao-PR04.docx lido com 78 achados e nenhuma decisão divergente. Nenhuma classificação foi alterada."
+  },
+  "respostas": {
+    "R01": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        },
+        {
+          "n": 6,
+          "trecho": "A data da operação fornecida pelo cliente deveria vir de um relógio injetável; currentDate permitiria contornar as regras temporais.",
+          "classificacao": "FP",
+          "defeito": null,
+          "parcial": false,
+          "justificativa": "A PR04 define currentDate como entrada da operação para tornar a data controlável e determinística. O requisito proíbe dependência direta do relógio da máquina, mas não exige que o servidor ignore a data informada nem uma abstração injetável. A alegação trata a interface especificada como defeito."
+        }
+      ]
+    },
+    "R02": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R03": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R04": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R05": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R06": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R07": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 2,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 3,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 4,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        },
+        {
+          "n": 5,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        }
+      ]
+    },
+    "R08": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R09": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ],
+      "observacao": "A alegação adicional sobre rollback/snapshot foi consolidada com PR04-01, pois descreve outra manifestação da mesma causa raiz: o decremento ocorre antes da transação."
+    },
+    "R10": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        },
+        {
+          "n": 6,
+          "trecho": "A data da operação fornecida pelo cliente deveria vir de um relógio injetável; currentDate permitiria contornar as regras temporais.",
+          "classificacao": "FP",
+          "defeito": null,
+          "parcial": false,
+          "justificativa": "A PR04 define currentDate como entrada da operação para tornar a data controlável e determinística. O requisito proíbe dependência direta do relógio da máquina, mas não exige que o servidor ignore a data informada nem uma abstração injetável. A alegação trata a interface especificada como defeito."
+        }
+      ]
+    },
+    "R11": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ]
+    },
+    "R12": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ],
+      "observacao": "A alegação adicional sobre rollback/snapshot foi consolidada com PR04-01, pois descreve outra manifestação da mesma causa raiz: o decremento ocorre antes da transação."
+    },
+    "R13": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        },
+        {
+          "n": 6,
+          "trecho": "A data da operação fornecida pelo cliente deveria vir de um relógio injetável; currentDate permitiria contornar as regras temporais.",
+          "classificacao": "FP",
+          "defeito": null,
+          "parcial": false,
+          "justificativa": "A PR04 define currentDate como entrada da operação para tornar a data controlável e determinística. O requisito proíbe dependência direta do relógio da máquina, mas não exige que o servidor ignore a data informada nem uma abstração injetável. A alegação trata a interface especificada como defeito."
+        }
+      ]
+    },
+    "R14": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        }
+      ],
+      "observacao": "A observação sobre métodos externos ao diff foi explicitamente marcada como não confirmada e não é contada como achado."
+    },
+    "R15": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A data prevista usa new Date() em vez de currentDate.",
+          "classificacao": "TP",
+          "defeito": "PR04-05",
+          "parcial": false,
+          "justificativa": "A resposta identifica a dependência do relógio da máquina e o vencimento calculado a partir da data errada."
+        },
+        {
+          "n": 2,
+          "trecho": "O limite usa o histórico completo e inclui empréstimos já devolvidos.",
+          "classificacao": "TP",
+          "defeito": "PR04-02",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUser no lugar da consulta de empréstimos abertos e a rejeição indevida."
+        },
+        {
+          "n": 3,
+          "trecho": "A comparação <= considera atrasado o empréstimo que vence na data da operação.",
+          "classificacao": "TP",
+          "defeito": "PR04-03",
+          "parcial": false,
+          "justificativa": "A resposta identifica a condição de fronteira e informa corretamente que a comparação deve ser estrita."
+        },
+        {
+          "n": 4,
+          "trecho": "A consulta de duplicidade considera empréstimos devolvidos do mesmo livro.",
+          "classificacao": "TP",
+          "defeito": "PR04-04",
+          "parcial": false,
+          "justificativa": "A resposta identifica findByUserAndBook no lugar da consulta restrita aos empréstimos abertos."
+        },
+        {
+          "n": 5,
+          "trecho": "Estoque decrementado antes de todas as validações; uma rejeição posterior pode deixar availableCopies reduzido.",
+          "classificacao": "TP",
+          "defeito": "PR04-01",
+          "parcial": false,
+          "justificativa": "A resposta localiza a mutação antecipada, descreve a rejeição posterior e o efeito persistente no estoque."
+        }
+      ],
+      "observacao": "A alegação adicional sobre rollback/snapshot foi consolidada com PR04-01, pois descreve outra manifestação da mesma causa raiz: o decremento ocorre antes da transação."
+    }
+  }
+}

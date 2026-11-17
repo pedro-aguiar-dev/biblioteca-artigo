@@ -1,0 +1,1 @@
+Implementação da funcionalidade de realização de empréstimos (RF04), com os endpoints POST /loans (realizar empréstimo) e GET /loans (listar empréstimos para verificação).

@@ -1,0 +1,328 @@
+Atue como revisor de código.
+
+Analise o Pull Request abaixo considerando os requisitos e regras de negócio fornecidos.
+
+Identifique defeitos funcionais introduzidos pelas alterações. Considere como defeito apenas algo que possa gerar comportamento incorreto ou violar um requisito.
+
+Não reporte questões de estilo, nomenclatura ou refatorações opcionais.
+
+O Pull Request pode conter zero ou mais defeitos.
+
+Para cada defeito encontrado, informe:
+- localização;
+- descrição do problema;
+- comportamento esperado;
+- comportamento atual;
+- requisito relacionado.
+
+Requisitos da funcionalidade:
+RF04 Realizar empréstimo: o sistema deve permitir o empréstimo de um livro disponível para um usuário elegível.
+- CA14 O empréstimo deve ser associado a um usuário e a um livro existentes.
+- CA15 A data prevista deve corresponder à data do empréstimo acrescida de 14 dias.
+- CA16 A quantidade disponível deve ser reduzida em uma unidade.
+- CA17 A operação deve ser rejeitada quando não houver exemplar disponível.
+- CA18 A operação deve ser rejeitada quando o usuário possuir empréstimo atrasado.
+- CA19 A operação deve ser rejeitada quando o usuário já possuir três empréstimos em aberto.
+- CA20 A operação deve ser rejeitada quando o usuário já possuir o mesmo livro emprestado.
+- CA21 Qualquer rejeição deve preservar a quantidade disponível.
+
+RN01 O prazo inicial de empréstimo é de 14 dias corridos.
+RN04 Cada usuário pode possuir no máximo três empréstimos em aberto.
+RN05 Um usuário não pode manter dois empréstimos abertos para o mesmo livro.
+RN06 Um usuário com qualquer empréstimo atrasado não pode realizar um novo empréstimo.
+RN07 Um empréstimo está atrasado quando a data prevista é anterior à data da operação.
+RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+RN09 A quantidade disponível deve permanecer entre zero e a quantidade total de exemplares.
+RNF01 Datas e horários devem ser fornecidos por um relógio controlável nos testes, sem depender diretamente do horário da máquina.
+
+Modelo de dados (Empréstimo): identificador, usuário, livro, data do empréstimo, data prevista, data de devolução e quantidade de renovações.
+
+Descrição do Pull Request:
+Implementação da funcionalidade de realização de empréstimos (RF04), com os endpoints POST /loans (realizar empréstimo) e GET /loans (listar empréstimos para verificação).
+
+Diff:
+diff --git a/src/app.js b/src/app.js
+index 12bb11b..c8b4d6a 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -6,12 +6,17 @@ import { createBookRouter } from "./books/book.routes.js";
+ import { UserRepository } from "./users/user.repository.js";
+ import { UserService } from "./users/user.service.js";
+ import { createUserRouter } from "./users/user.routes.js";
++import { LoanRepository } from "./loans/loan.repository.js";
++import { LoanService } from "./loans/loan.service.js";
++import { createLoanRouter } from "./loans/loan.routes.js";
+ 
+ export function createApp() {
+   const bookRepository = new BookRepository();
+   const bookService = new BookService(bookRepository);
+   const userRepository = new UserRepository();
+   const userService = new UserService(userRepository);
++  const loanRepository = new LoanRepository();
++  const loanService = new LoanService(loanRepository, bookRepository, userRepository);
+ 
+   const app = express();
+ 
+@@ -19,6 +24,7 @@ export function createApp() {
+ 
+   app.use("/books", createBookRouter(bookService));
+   app.use("/users", createUserRouter(userService));
++  app.use("/loans", createLoanRouter(loanService));
+ 
+   app.use(handleError);
+ 
+diff --git a/src/books/book.repository.js b/src/books/book.repository.js
+index 6812b89..9850991 100644
+--- a/src/books/book.repository.js
++++ b/src/books/book.repository.js
+@@ -39,6 +39,15 @@ export class BookRepository {
+ 
+     return book;
+   }
++
++  snapshot() {
++    return { books: structuredClone(this.#books), nextId: this.#nextId };
++  }
++
++  restore(snapshot) {
++    this.#books = snapshot.books;
++    this.#nextId = snapshot.nextId;
++  }
+ }
+ 
+ function matchesTerm(text, term) {
+diff --git a/src/loans/loan.repository.js b/src/loans/loan.repository.js
+new file mode 100644
+index 0000000..76d2c92
+--- /dev/null
++++ b/src/loans/loan.repository.js
+@@ -0,0 +1,64 @@
++export class LoanRepository {
++  #loans = [];
++  #nextId = 1;
++
++  async findAll() {
++    return [...this.#loans];
++  }
++
++  async findByUser(userId) {
++    return this.#loans.filter((loan) => loan.userId === userId);
++  }
++
++  async findOpenByUser(userId) {
++    return this.#loans.filter(
++      (loan) => loan.userId === userId && loan.returnDate === null
++    );
++  }
++
++  async findByUserAndBook(userId, bookId) {
++    return (
++      this.#loans.find(
++        (loan) => loan.userId === userId && loan.bookId === bookId
++      ) ?? null
++    );
++  }
++
++  async findOpenByUserAndBook(userId, bookId) {
++    return (
++      this.#loans.find(
++        (loan) =>
++          loan.userId === userId &&
++          loan.bookId === bookId &&
++          loan.returnDate === null
++      ) ?? null
++    );
++  }
++
++  async save(loan) {
++    if (loan.id === undefined) {
++      const createdLoan = { ...loan, id: this.#nextId++ };
++      this.#loans.push(createdLoan);
++      return createdLoan;
++    }
++
++    const index = this.#loans.findIndex((storedLoan) => storedLoan.id === loan.id);
++
++    if (index === -1) {
++      this.#loans.push(loan);
++    } else {
++      this.#loans[index] = loan;
++    }
++
++    return loan;
++  }
++
++  snapshot() {
++    return { loans: structuredClone(this.#loans), nextId: this.#nextId };
++  }
++
++  restore(snapshot) {
++    this.#loans = snapshot.loans;
++    this.#nextId = snapshot.nextId;
++  }
++}
+diff --git a/src/loans/loan.routes.js b/src/loans/loan.routes.js
+new file mode 100644
+index 0000000..00e3dd6
+--- /dev/null
++++ b/src/loans/loan.routes.js
+@@ -0,0 +1,23 @@
++import { Router } from "express";
++
++export function createLoanRouter(loanService) {
++  const router = Router();
++
++  router.get("/", async (req, res, next) => {
++    try {
++      res.json(await loanService.listLoans());
++    } catch (error) {
++      next(error);
++    }
++  });
++
++  router.post("/", async (req, res, next) => {
++    try {
++      res.status(201).json(await loanService.createLoan(req.body));
++    } catch (error) {
++      next(error);
++    }
++  });
++
++  return router;
++}
+diff --git a/src/loans/loan.service.js b/src/loans/loan.service.js
+new file mode 100644
+index 0000000..086a27e
+--- /dev/null
++++ b/src/loans/loan.service.js
+@@ -0,0 +1,90 @@
++import { AppError } from "../shared/app-error.js";
++import { addDays, formatDate, parseDate } from "../shared/date.js";
++import { runInTransaction } from "../shared/transaction.js";
++
++const LOAN_DAYS = 14;
++const MAX_OPEN_LOANS = 3;
++
++export class LoanService {
++  constructor(loanRepository, bookRepository, userRepository) {
++    this.loanRepository = loanRepository;
++    this.bookRepository = bookRepository;
++    this.userRepository = userRepository;
++  }
++
++  async listLoans() {
++    return this.loanRepository.findAll();
++  }
++
++  async createLoan(input) {
++    const userId = parseId(input?.userId);
++    const bookId = parseId(input?.bookId);
++    const currentDate = parseDate(input?.currentDate);
++
++    if (userId === null || bookId === null || currentDate === null) {
++      throw new AppError("INVALID_LOAN", 400);
++    }
++
++    const user = await this.userRepository.findById(userId);
++    if (!user) {
++      throw new AppError("USER_NOT_FOUND", 404);
++    }
++
++    const book = await this.bookRepository.findOne({ id: bookId });
++    if (!book) {
++      throw new AppError("BOOK_NOT_FOUND", 404);
++    }
++
++    if (book.availableCopies <= 0) {
++      throw new AppError("BOOK_UNAVAILABLE", 409);
++    }
++
++    book.availableCopies -= 1;
++
++    const loans = await this.loanRepository.findByUser(userId);
++    if (loans.length >= MAX_OPEN_LOANS) {
++      throw new AppError("LOAN_LIMIT_REACHED", 409);
++    }
++
++    const openLoans = await this.loanRepository.findOpenByUser(userId);
++    const operationDate = formatDate(currentDate);
++    if (openLoans.some((loan) => loan.dueDate <= operationDate)) {
++      throw new AppError("OVERDUE_LOAN", 409);
++    }
++
++    const duplicatedBook = await this.loanRepository.findByUserAndBook(
++      userId,
++      bookId
++    );
++    if (duplicatedBook) {
++      throw new AppError("BOOK_ALREADY_BORROWED", 409);
++    }
++
++    const loan = {
++      userId,
++      bookId,
++      loanDate: operationDate,
++      dueDate: formatDate(addDays(new Date(), LOAN_DAYS)),
++      returnDate: null,
++      renewalCount: 0,
++    };
++
++    return this.persistLoan(loan, book);
++  }
++
++  async persistLoan(loan, book) {
++    return runInTransaction(
++      [this.loanRepository, this.bookRepository],
++      async () => {
++        const createdLoan = await this.loanRepository.save(loan);
++        await this.bookRepository.save(book);
++        return createdLoan;
++      }
++    );
++  }
++}
++
++function parseId(value) {
++  const id = Number(value);
++  return Number.isInteger(id) && id > 0 ? id : null;
++}
+diff --git a/src/shared/date.js b/src/shared/date.js
+new file mode 100644
+index 0000000..5149d89
+--- /dev/null
++++ b/src/shared/date.js
+@@ -0,0 +1,18 @@
++export function parseDate(value) {
++  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
++    return null;
++  }
++
++  const date = new Date(`${value}T00:00:00.000Z`);
++  return Number.isNaN(date.getTime()) || formatDate(date) !== value ? null : date;
++}
++
++export function addDays(date, days) {
++  const result = new Date(date);
++  result.setUTCDate(result.getUTCDate() + days);
++  return result;
++}
++
++export function formatDate(date) {
++  return date.toISOString().slice(0, 10);
++}
+diff --git a/src/shared/transaction.js b/src/shared/transaction.js
+new file mode 100644
+index 0000000..cc90f39
+--- /dev/null
++++ b/src/shared/transaction.js
+@@ -0,0 +1,10 @@
++export async function runInTransaction(repositories, operation) {
++  const snapshots = repositories.map((repository) => repository.snapshot());
++
++  try {
++    return await operation();
++  } catch (error) {
++    repositories.forEach((repository, index) => repository.restore(snapshots[index]));
++    throw error;
++  }
++}

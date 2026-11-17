@@ -1,0 +1,526 @@
+{
+  "pr": "PR05",
+  "geradoEm": "2026-10-09T21:08:19.824Z",
+  "execucoes": [
+    {
+      "id": "R03",
+      "modelo": "chatgpt",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R08",
+      "modelo": "chatgpt",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 0.8,
+      "recall": 1,
+      "f1": 0.888888888888889
+    },
+    {
+      "id": "R07",
+      "modelo": "chatgpt",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R14",
+      "modelo": "chatgpt",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R13",
+      "modelo": "chatgpt",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R09",
+      "modelo": "claude",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R01",
+      "modelo": "claude",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R06",
+      "modelo": "claude",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R02",
+      "modelo": "claude",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 0.8,
+      "recall": 1,
+      "f1": 0.888888888888889
+    },
+    {
+      "id": "R05",
+      "modelo": "claude",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03",
+        "PR05-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R04",
+      "modelo": "gemini",
+      "execucao": 1,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R12",
+      "modelo": "gemini",
+      "execucao": 2,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R10",
+      "modelo": "gemini",
+      "execucao": 3,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R15",
+      "modelo": "gemini",
+      "execucao": 4,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "id": "R11",
+      "modelo": "gemini",
+      "execucao": 5,
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR05-01",
+        "PR05-02",
+        "PR05-03"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    }
+  ],
+  "porModelo": [
+    {
+      "modelo": "chatgpt",
+      "execucoes": 5,
+      "precision": {
+        "media": 0.96,
+        "desvio": 0.08944271909999157
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 0.9777777777777779,
+        "desvio": 0.0496903994999953
+      },
+      "tp": 20,
+      "fp": 1,
+      "fn": 0,
+      "micro": {
+        "precision": 0.9523809523809523,
+        "recall": 1,
+        "f1": 0.975609756097561
+      }
+    },
+    {
+      "modelo": "claude",
+      "execucoes": 5,
+      "precision": {
+        "media": 0.96,
+        "desvio": 0.08944271909999157
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 0.9777777777777779,
+        "desvio": 0.0496903994999953
+      },
+      "tp": 20,
+      "fp": 1,
+      "fn": 0,
+      "micro": {
+        "precision": 0.9523809523809523,
+        "recall": 1,
+        "f1": 0.975609756097561
+      }
+    },
+    {
+      "modelo": "gemini",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 0.75,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 0.8571428571428571,
+        "desvio": 0
+      },
+      "tp": 15,
+      "fp": 0,
+      "fn": 5,
+      "micro": {
+        "precision": 1,
+        "recall": 0.75,
+        "f1": 0.8571428571428571
+      }
+    }
+  ],
+  "porDefeito": [
+    {
+      "defeito": "PR05-01",
+      "titulo": "Estoque incrementado antes de verificar devolução duplicada",
+      "dificuldade": "Alta",
+      "categoria": "Efeito colateral / ordem de execução",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR05-02",
+      "titulo": "Empréstimo atrasado não pode ser devolvido",
+      "dificuldade": "Média",
+      "categoria": "Reutilização incorreta de regra",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR05-03",
+      "titulo": "Devolução restaura todo o estoque do livro",
+      "dificuldade": "Média",
+      "categoria": "Estado / quantidade disponível",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR05-05",
+      "titulo": "Atualização do empréstimo e do estoque sem atomicidade",
+      "dificuldade": "Alta",
+      "categoria": "Persistência / consistência",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "deteccoes": 0,
+          "frequencia": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Implementação das funcionalidades de cadastro de usuários (RF02) e de atualização de e-mail (RF07), com os endpoints POST /users (cadastrar usuário), GET /users (listar usuários, com paginação) e PATCH /users/:id/email (atualizar e-mail).

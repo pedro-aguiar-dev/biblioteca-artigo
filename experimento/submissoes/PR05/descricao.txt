@@ -1,0 +1,1 @@
+Este Pull Request implementa a devolução de empréstimos por meio de POST /loans/:id/return e mantém a consulta dos empréstimos em GET /loans.

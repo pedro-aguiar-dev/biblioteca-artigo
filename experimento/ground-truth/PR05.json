@@ -1,0 +1,14 @@
+{
+  "pr": "PR05",
+  "funcionalidade": "Realização de devoluções (RF05)",
+  "baseline": "pr05-baseline (0233555)",
+  "experimental": "pr05-experimental (4c7880e)",
+  "diff": "git diff pr04-corrigido pr05-experimental",
+  "entrada_llm_sha256": "218df47678e208b36910919944530b8e4a43925a3bc4806038b29c629d008be1",
+  "defeitos": [
+    {"pr":"PR05","bug_id":"PR05-01","title":"Estoque incrementado antes de verificar devolução duplicada","requirement":"RF05 / CA25–CA26; RN08–RN09","difficulty":"Alta","category":"Efeito colateral / ordem de execução","file":"src/loans/loan.service.js","root_cause":"availableCopies é incrementado antes da verificação de returnDate.","expected_behavior":"Tentativa duplicada preserva o estoque.","observed_behavior":"Segunda devolução aumenta o estoque e depois é rejeitada."},
+    {"pr":"PR05","bug_id":"PR05-02","title":"Empréstimo atrasado não pode ser devolvido","requirement":"RF05 / CA24","difficulty":"Média","category":"Reutilização incorreta de regra","file":"src/loans/loan.service.js","root_cause":"Validador de atraso é chamado na devolução.","expected_behavior":"Atraso não bloqueia devolução.","observed_behavior":"Empréstimo vencido recebe OVERDUE_LOAN."},
+    {"pr":"PR05","bug_id":"PR05-03","title":"Devolução restaura todo o estoque do livro","requirement":"RF05 / CA23; RN09","difficulty":"Média","category":"Estado / quantidade disponível","file":"src/loans/loan.service.js","root_cause":"availableCopies recebe totalCopies em vez de ser incrementado em uma unidade.","expected_behavior":"Uma devolução aumenta uma unidade.","observed_behavior":"Uma devolução libera todos os exemplares."},
+    {"pr":"PR05","bug_id":"PR05-05","title":"Atualização do empréstimo e do estoque sem atomicidade","requirement":"RF05 / CA22–CA23; RN08","difficulty":"Alta","category":"Persistência / consistência","file":"src/loans/loan.service.js","root_cause":"As duas gravações ocorrem sem runInTransaction.","expected_behavior":"Falha parcial reverte empréstimo e estoque.","observed_behavior":"Falha ao salvar livro pode deixar o empréstimo devolvido."}
+  ]
+}

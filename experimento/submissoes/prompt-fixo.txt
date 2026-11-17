@@ -1,0 +1,16 @@
+Atue como revisor de código.
+
+Analise o Pull Request abaixo considerando os requisitos e regras de negócio fornecidos.
+
+Identifique defeitos funcionais introduzidos pelas alterações. Considere como defeito apenas algo que possa gerar comportamento incorreto ou violar um requisito.
+
+Não reporte questões de estilo, nomenclatura ou refatorações opcionais.
+
+O Pull Request pode conter zero ou mais defeitos.
+
+Para cada defeito encontrado, informe:
+- localização;
+- descrição do problema;
+- comportamento esperado;
+- comportamento atual;
+- requisito relacionado.

@@ -1,0 +1,12 @@
+RF01 Cadastrar livro: o sistema deve permitir o cadastro de livros.
+- CA01 Um livro válido deve ser armazenado com a quantidade disponível igual à quantidade total.
+- CA02 O ISBN deve ser obrigatório e único.
+- CA03 Título e autor não podem estar vazios.
+- CA04 A quantidade total de exemplares deve ser maior que zero.
+- CA05 Um cadastro inválido deve ser rejeitado sem alterar o acervo.
+
+Regras de negócio aplicáveis:
+- RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+- RN09 A quantidade disponível deve permanecer entre zero e a quantidade total de exemplares.
+
+Modelo de dados (Livro): identificador, ISBN, título, autor, quantidade total e quantidade disponível.

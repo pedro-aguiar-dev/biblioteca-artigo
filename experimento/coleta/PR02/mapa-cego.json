@@ -1,0 +1,62 @@
+{
+  "R01": {
+    "modelo": "chatgpt",
+    "execucao": 4
+  },
+  "R02": {
+    "modelo": "gemini",
+    "execucao": 4
+  },
+  "R03": {
+    "modelo": "claude",
+    "execucao": 4
+  },
+  "R04": {
+    "modelo": "chatgpt",
+    "execucao": 1
+  },
+  "R05": {
+    "modelo": "gemini",
+    "execucao": 2
+  },
+  "R06": {
+    "modelo": "chatgpt",
+    "execucao": 5
+  },
+  "R07": {
+    "modelo": "gemini",
+    "execucao": 3
+  },
+  "R08": {
+    "modelo": "claude",
+    "execucao": 5
+  },
+  "R09": {
+    "modelo": "gemini",
+    "execucao": 5
+  },
+  "R10": {
+    "modelo": "chatgpt",
+    "execucao": 3
+  },
+  "R11": {
+    "modelo": "claude",
+    "execucao": 2
+  },
+  "R12": {
+    "modelo": "chatgpt",
+    "execucao": 2
+  },
+  "R13": {
+    "modelo": "claude",
+    "execucao": 3
+  },
+  "R14": {
+    "modelo": "claude",
+    "execucao": 1
+  },
+  "R15": {
+    "modelo": "gemini",
+    "execucao": 1
+  }
+}

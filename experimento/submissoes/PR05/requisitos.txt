@@ -1,0 +1,14 @@
+RF05 Realizar devolução
+O sistema deve permitir a devolução de um empréstimo em aberto.
+● CA22 A data da devolução deve ser registrada.
+● CA23 A quantidade disponível do livro deve aumentar em uma unidade.
+● CA24 A devolução deve ser aceita mesmo quando estiver atrasada.
+● CA25 Um empréstimo já devolvido não pode ser devolvido novamente.
+● CA26 Uma tentativa duplicada não pode aumentar novamente a quantidade disponível.
+
+RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+RN09 A quantidade disponível nunca pode ser negativa nem superior à quantidade total.
+
+Modelo mínimo de dados
+Livro: identificador, ISBN, título, autor, quantidade total e quantidade disponível.
+Empréstimo: identificador, usuário, livro, data do empréstimo, data prevista, data de devolução e quantidade de renovações.

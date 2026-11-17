@@ -1,0 +1,1 @@
+Implementação da funcionalidade de cadastro de livros (RF01), com os endpoints POST /books (cadastrar livro) e GET /books (listar o acervo).

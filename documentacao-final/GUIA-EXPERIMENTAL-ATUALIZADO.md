@@ -97,7 +97,7 @@ As respostas foram cegadas antes da classificação, o mapa ficou fechado, e o p
 
 ## 9. Resultado de validação do protocolo
 
-As seis matrizes de oráculos atenderam ao critério de independência. A versão final passou em 112 testes e em todos os roteiros HTTP. As métricas oficiais somaram 365 TP, 6 FP e 10 FN. O detalhamento encontra-se em `RELATORIO-COMPLETO-EXPERIMENTO.md` e nos arquivos `../biblioteca-experimento/coleta/PRNN/resultados-PRNN.*`.
+As seis matrizes de oráculos atenderam ao critério de independência. A versão final passou em 112 testes e em todos os roteiros HTTP. As métricas oficiais somaram 365 TP, 6 FP e 10 FN. O detalhamento encontra-se em `RELATORIO-COMPLETO-EXPERIMENTO.md` e nos arquivos `../experimento/coleta/PRNN/resultados-PRNN.*`.
 
 ## 10. Checklist para reprodução
 

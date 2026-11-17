@@ -1,0 +1,1 @@
+Este Pull Request implementa a renovação de empréstimos por meio de POST /loans/:id/renew e mantém os endpoints existentes de empréstimos e devoluções.

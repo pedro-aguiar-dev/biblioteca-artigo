@@ -1,0 +1,17 @@
+RF06 Renovar empréstimo
+O sistema deve permitir a renovação de um empréstimo em aberto.
+● CA27 Cada renovação deve acrescentar 7 dias à data prevista atual.
+● CA28 O contador de renovações deve aumentar em uma unidade.
+● CA29 A quantidade disponível não deve ser alterada.
+● CA30 Empréstimos atrasados não podem ser renovados.
+● CA31 Uma quarta renovação deve ser rejeitada.
+● CA32 Uma renovação rejeitada não deve modificar a data nem o contador.
+
+RN02 Cada renovação acrescenta 7 dias à data prevista atual.
+RN03 Um empréstimo pode ser renovado no máximo três vezes.
+RN07 Um empréstimo está atrasado quando a data prevista é anterior à data da operação.
+RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+
+Modelo mínimo de dados
+Livro: identificador, ISBN, título, autor, quantidade total e quantidade disponível.
+Empréstimo: identificador, usuário, livro, data do empréstimo, data prevista, data de devolução e quantidade de renovações.

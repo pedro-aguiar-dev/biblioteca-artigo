@@ -1,0 +1,92 @@
+diff --git a/src/loans/loan.repository.js b/src/loans/loan.repository.js
+index 76d2c92..e31cdb2 100644
+--- a/src/loans/loan.repository.js
++++ b/src/loans/loan.repository.js
+@@ -6,6 +6,10 @@ export class LoanRepository {
+     return [...this.#loans];
+   }
+ 
++  async findById(id) {
++    return this.#loans.find((loan) => loan.id === id) ?? null;
++  }
++
+   async findByUser(userId) {
+     return this.#loans.filter((loan) => loan.userId === userId);
+   }
+diff --git a/src/loans/loan.routes.js b/src/loans/loan.routes.js
+index 00e3dd6..c71c3e4 100644
+--- a/src/loans/loan.routes.js
++++ b/src/loans/loan.routes.js
+@@ -19,5 +19,18 @@ export function createLoanRouter(loanService) {
+     }
+   });
+ 
++  router.post("/:id/return", async (req, res, next) => {
++    try {
++      res.json(
++        await loanService.returnLoan({
++          loanId: req.params.id,
++          currentDate: req.body?.currentDate,
++        })
++      );
++    } catch (error) {
++      next(error);
++    }
++  });
++
+   return router;
+ }
+diff --git a/src/loans/loan.service.js b/src/loans/loan.service.js
+index 672f29f..a2caebe 100644
+--- a/src/loans/loan.service.js
++++ b/src/loans/loan.service.js
+@@ -69,6 +69,39 @@ export class LoanService {
+     return this.persistLoan(loan, book);
+   }
+ 
++  async returnLoan(input) {
++    const loanId = parseId(input?.loanId);
++    const currentDate = parseDate(input?.currentDate);
++
++    if (loanId === null || currentDate === null) {
++      throw new AppError("INVALID_RETURN", 400);
++    }
++
++    const loan = await this.loanRepository.findById(loanId);
++    if (!loan) {
++      throw new AppError("LOAN_NOT_FOUND", 404);
++    }
++
++    const book = await this.bookRepository.findOne({ id: loan.bookId });
++    if (!book) {
++      throw new AppError("BOOK_NOT_FOUND", 404);
++    }
++
++    book.availableCopies += 1;
++
++    if (loan.returnDate) {
++      throw new AppError("LOAN_ALREADY_RETURNED", 409);
++    }
++
++    validateLoanIsNotOverdue(loan, formatDate(currentDate));
++
++    loan.returnDate = formatDate(currentDate);
++    const returnedLoan = await this.loanRepository.save(loan);
++    book.availableCopies = book.totalCopies;
++    await this.bookRepository.save(book);
++    return returnedLoan;
++  }
++
+   async persistLoan(loan, book) {
+     return runInTransaction(
+       [this.loanRepository, this.bookRepository],
+@@ -86,3 +119,9 @@ function parseId(value) {
+   const id = Number(value);
+   return Number.isInteger(id) && id > 0 ? id : null;
+ }
++
++function validateLoanIsNotOverdue(loan, currentDate) {
++  if (loan.dueDate < currentDate) {
++    throw new AppError("OVERDUE_LOAN", 409);
++  }
++}

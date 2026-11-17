@@ -1,0 +1,528 @@
+{
+  "pr": "PR05",
+  "classificado_por": "assistente (Codex), às cegas — mapa-cego.json não consultado",
+  "data": "2026-10-09",
+  "protocolo": "coleta/protocolo-analise.md (versão fixada em 2026-10-01)",
+  "revisao_pesquisador": {
+    "data": "2026-10-09",
+    "resultado": "Pesquisador aprovou integralmente o documento de revisão; revisao-PR05.docx lido com 57 achados e nenhuma decisão divergente. Nenhuma classificação foi alterada."
+  },
+  "respostas": {
+    "R01": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R02": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        },
+        {
+          "n": 5,
+          "trecho": "A data de devolução não é validada contra a data do empréstimo e currentDate vem do cliente.",
+          "classificacao": "FP",
+          "defeito": null,
+          "parcial": false,
+          "justificativa": "Os requisitos exigem registrar uma data controlada, mas não definem que a devolução deva ser igual ou posterior à data do empréstimo nem proíbem currentDate na entrada. A alegação acrescenta uma regra não especificada."
+        }
+      ]
+    },
+    "R03": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R04": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        }
+      ]
+    },
+    "R05": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R06": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R07": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R08": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        },
+        {
+          "n": 5,
+          "trecho": "Devoluções simultâneas podem processar o mesmo empréstimo mais de uma vez.",
+          "classificacao": "FP",
+          "defeito": null,
+          "parcial": false,
+          "justificativa": "A resposta apresenta um risco condicional a outra implementação de repositório. No sistema fornecido, o objeto compartilhado recebe returnDate antes da cessão assíncrona relevante, e o comportamento alegado não é comprovável no recorte."
+        }
+      ]
+    },
+    "R09": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R10": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        }
+      ]
+    },
+    "R11": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        }
+      ]
+    },
+    "R12": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        }
+      ]
+    },
+    "R13": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R14": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        },
+        {
+          "n": 3,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 4,
+          "trecho": "Empréstimo e livro são salvos separadamente, sem runInTransaction.",
+          "classificacao": "TP",
+          "defeito": "PR05-05",
+          "parcial": false,
+          "justificativa": "Identifica a falta de atomicidade e o estado parcial possível quando a segunda gravação falha."
+        }
+      ]
+    },
+    "R15": {
+      "achados": [
+        {
+          "n": 1,
+          "trecho": "A validação de atraso rejeita uma devolução posterior ao vencimento.",
+          "classificacao": "TP",
+          "defeito": "PR05-02",
+          "parcial": false,
+          "justificativa": "Identifica o validador indevido e a violação de CA24."
+        },
+        {
+          "n": 2,
+          "trecho": "A devolução define availableCopies como totalCopies em vez de incrementar uma unidade.",
+          "classificacao": "TP",
+          "defeito": "PR05-03",
+          "parcial": false,
+          "justificativa": "Identifica a atribuição incorreta e o estoque inflado quando há outros exemplares emprestados."
+        },
+        {
+          "n": 3,
+          "trecho": "O estoque é incrementado antes de verificar se o empréstimo já foi devolvido.",
+          "classificacao": "TP",
+          "defeito": "PR05-01",
+          "parcial": false,
+          "justificativa": "Identifica a mutação antecipada e o efeito sobre uma tentativa duplicada rejeitada."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,173 @@
+Atue como revisor de código.
+
+Analise o Pull Request abaixo considerando os requisitos e regras de negócio fornecidos.
+
+Identifique defeitos funcionais introduzidos pelas alterações. Considere como defeito apenas algo que possa gerar comportamento incorreto ou violar um requisito.
+
+Não reporte questões de estilo, nomenclatura ou refatorações opcionais.
+
+O Pull Request pode conter zero ou mais defeitos.
+
+Para cada defeito encontrado, informe:
+- localização;
+- descrição do problema;
+- comportamento esperado;
+- comportamento atual;
+- requisito relacionado.
+
+Requisitos da funcionalidade:
+RF01 Cadastrar livro: o sistema deve permitir o cadastro de livros.
+- CA01 Um livro válido deve ser armazenado com a quantidade disponível igual à quantidade total.
+- CA02 O ISBN deve ser obrigatório e único.
+- CA03 Título e autor não podem estar vazios.
+- CA04 A quantidade total de exemplares deve ser maior que zero.
+- CA05 Um cadastro inválido deve ser rejeitado sem alterar o acervo.
+
+Regras de negócio aplicáveis:
+- RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+- RN09 A quantidade disponível deve permanecer entre zero e a quantidade total de exemplares.
+
+Modelo de dados (Livro): identificador, ISBN, título, autor, quantidade total e quantidade disponível.
+
+Descrição do Pull Request:
+Implementação da funcionalidade de cadastro de livros (RF01), com os endpoints POST /books (cadastrar livro) e GET /books (listar o acervo).
+
+Diff:
+diff --git a/src/app.js b/src/app.js
+index 69b251a..f5d73ed 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,11 +1,19 @@
+ import express from "express";
+ import { AppError } from "./shared/app-error.js";
++import { BookRepository } from "./books/book.repository.js";
++import { BookService } from "./books/book.service.js";
++import { createBookRouter } from "./books/book.routes.js";
+ 
+ export function createApp() {
++  const bookRepository = new BookRepository();
++  const bookService = new BookService(bookRepository);
++
+   const app = express();
+ 
+   app.use(express.json());
+ 
++  app.use("/books", createBookRouter(bookService));
++
+   app.use(handleError);
+ 
+   return app;
+diff --git a/src/books/book.repository.js b/src/books/book.repository.js
+new file mode 100644
+index 0000000..10e9fc4
+--- /dev/null
++++ b/src/books/book.repository.js
+@@ -0,0 +1,36 @@
++export class BookRepository {
++  #books = [];
++  #nextId = 1;
++
++  async findAll() {
++    return [...this.#books];
++  }
++
++  async findOne(criteria) {
++    const conditions = Object.entries(criteria);
++
++    return (
++      this.#books.find((book) =>
++        conditions.every(([field, value]) => book[field] === value)
++      ) ?? null
++    );
++  }
++
++  async save(book) {
++    if (book.id === undefined) {
++      const createdBook = { ...book, id: this.#nextId++ };
++      this.#books.push(createdBook);
++      return createdBook;
++    }
++
++    const index = this.#books.findIndex((storedBook) => storedBook.id === book.id);
++
++    if (index === -1) {
++      this.#books.push(book);
++    } else {
++      this.#books[index] = book;
++    }
++
++    return book;
++  }
++}
+diff --git a/src/books/book.routes.js b/src/books/book.routes.js
+new file mode 100644
+index 0000000..de56337
+--- /dev/null
++++ b/src/books/book.routes.js
+@@ -0,0 +1,17 @@
++import { Router } from "express";
++
++export function createBookRouter(bookService) {
++  const router = Router();
++
++  router.post("/", async (req, res) => {
++    const book = await bookService.createBook(req.body ?? {});
++    res.status(201).json(book);
++  });
++
++  router.get("/", async (req, res) => {
++    const books = await bookService.listBooks();
++    res.json(books);
++  });
++
++  return router;
++}
+diff --git a/src/books/book.service.js b/src/books/book.service.js
+new file mode 100644
+index 0000000..af0c4e9
+--- /dev/null
++++ b/src/books/book.service.js
+@@ -0,0 +1,43 @@
++import { AppError } from "../shared/app-error.js";
++
++export class BookService {
++  constructor(bookRepository) {
++    this.bookRepository = bookRepository;
++  }
++
++  async createBook(input) {
++    const { isbn, title, author, totalCopies } = input;
++
++    const existingBook = await this.bookRepository.findOne({ isbn, title });
++
++    if (existingBook) {
++      throw new AppError("ISBN_ALREADY_EXISTS", 409);
++    }
++
++    const book = await this.bookRepository.save({
++      isbn,
++      title,
++      author,
++      totalCopies,
++      availableCopies: input.availableCopies ?? totalCopies,
++    });
++
++    if (isBlank(isbn) || isBlank(title) || isBlank(author)) {
++      throw new AppError("INVALID_BOOK");
++    }
++
++    if (!totalCopies) {
++      throw new AppError("INVALID_QUANTITY");
++    }
++
++    return book;
++  }
++
++  async listBooks() {
++    return this.bookRepository.findAll();
++  }
++}
++
++function isBlank(value) {
++  return typeof value !== "string" || value.trim() === "";
++}

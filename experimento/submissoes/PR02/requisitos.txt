@@ -1,0 +1,16 @@
+RF02 Cadastrar usuário: o sistema deve permitir o cadastro de usuários.
+- CA06 Um usuário com nome e e-mail válidos deve ser armazenado.
+- CA07 O e-mail deve ser obrigatório e único.
+- CA08 Nome vazio ou e-mail inválido deve causar a rejeição do cadastro.
+- CA09 Uma tentativa inválida não deve criar parcialmente o usuário.
+
+RF07 Atualizar e-mail de usuário: o sistema deve permitir alterar o e-mail de um usuário existente.
+- CA33 O novo e-mail deve ser válido.
+- CA34 O e-mail deve continuar único: não pode pertencer a outro usuário (manter o próprio e-mail é permitido).
+- CA35 A atualização de um usuário inexistente deve ser rejeitada.
+- CA36 Uma atualização rejeitada não deve alterar os dados do usuário.
+
+Regras de negócio aplicáveis:
+- RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+
+Modelo de dados (Usuário): identificador, nome e e-mail.

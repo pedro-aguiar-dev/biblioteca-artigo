@@ -1,0 +1,15 @@
+{
+  "name": "biblioteca-experimento-interno",
+  "private": true,
+  "type": "module",
+  "description": "Testes internos do experimento (baseline e oráculos). Nunca entregar às LLMs.",
+  "scripts": {
+    "test": "node --test \"testes/**/*.test.js\"",
+    "test:baseline": "node --test \"testes/baseline/**/*.test.js\"",
+    "test:oraculos": "node --test \"testes/oraculos/**/*.test.js\""
+  },
+  "dependencies": {
+    "docx": "^9.8.1",
+    "jszip": "^3.10.2"
+  }
+}

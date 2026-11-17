@@ -5,7 +5,7 @@
 Versão consolidada: 14 de outubro de 2026  
 Estado do sistema: implementação concluída, todas as PRs corrigidas e validadas  
 Repositório de código: `biblioteca-artigo`  
-Acervo metodológico interno: `../biblioteca-experimento`
+Acervo metodológico interno: `../experimento`
 
 ## 1. Finalidade deste documento
 
@@ -319,18 +319,18 @@ Cada incremento teve uma versão correta, uma versão com defeitos deliberados e
 ## 17. Rastreabilidade dos artefatos
 
 - Código final: `src/` neste repositório.
-- Histórico de decisões e linha do tempo: `../biblioteca-experimento/DECISOES.md`.
-- Ground truth: `../biblioteca-experimento/ground-truth/PR01..PR06.{md,json}`.
-- Entradas e diffs: `../biblioteca-experimento/submissoes/PR01..PR06/`.
-- Respostas e classificação: `../biblioteca-experimento/coleta/PR01..PR06/`.
+- Histórico de decisões e linha do tempo: `../experimento/DECISOES.md`.
+- Ground truth: `../experimento/ground-truth/PR01..PR06.{md,json}`.
+- Entradas e diffs: `../experimento/submissoes/PR01..PR06/`.
+- Respostas e classificação: `../experimento/coleta/PR01..PR06/`.
 - Resultados individuais: `resultados-PRNN.{md,json}` dentro de cada pasta de coleta.
-- Matrizes de independência: `../biblioteca-experimento/resultados/PRNN-matriz-oraculos.md`.
-- Testes: `../biblioteca-experimento/testes/` e `testes-manuais/`.
+- Matrizes de independência: `../experimento/resultados/PRNN-matriz-oraculos.md`.
+- Testes: `../experimento/testes/` e `testes-manuais/`.
 - Versão final: commit `a9ea606`, tag `pr06-corrigido`.
 
 ## 18. Estado de encerramento
 
-As seis funcionalidades foram implementadas; os 25 defeitos foram inseridos, validados e submetidos; as 90 respostas oficiais foram coletadas, anonimizadas, classificadas e revisadas; as métricas foram calculadas; os defeitos foram corrigidos; e a versão final passou por validação completa. Não houve push para repositório remoto. Os documentos desta pasta consolidam o estado final sem apagar as fontes, os dados brutos ou os desvios registrados durante a execução.
+As seis funcionalidades foram implementadas; os 25 defeitos foram inseridos, validados e submetidos; as 90 respostas oficiais foram coletadas, anonimizadas, classificadas e revisadas; as métricas foram calculadas; os defeitos foram corrigidos; e a versão final passou por validação completa. Após o encerramento da análise e a geração desta documentação, o projeto e seus artefatos foram publicados no repositório remoto para consulta e reprodução por outros pesquisadores. Os documentos desta pasta consolidam o estado final sem apagar as fontes, os dados brutos ou os desvios registrados durante a execução.
 
 
 # Apêndice A — registro integral de decisões, desvios e linha do tempo
@@ -461,3 +461,8 @@ Pasta interna (este arquivo, testes automatizados, oráculos): `c:\diversos\bibl
 
 
 **Nota editorial:** a última entrada da linha do tempo registra que o relatório ainda não havia sido iniciado naquele instante, porque essa foi a instrução vigente em 14/10/2026. A solicitação posterior do pesquisador deu origem ao presente relatório e supera aquele estado histórico.
+
+
+## 19. Publicação e reprodutibilidade
+
+O repositório público passou a conter o código final, a documentação em Markdown, Word e PDF, os documentos originais, o acervo experimental, as respostas brutas, os dados de classificação, os testes, os mutantes, os diffs e os resultados. As dependências de desenvolvimento não foram versionadas: para reproduzir as ferramentas internas, execute `npm ci` dentro de `experimento/`.

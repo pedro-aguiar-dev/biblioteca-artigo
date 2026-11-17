@@ -1,0 +1,531 @@
+{
+  "pr": "PR01",
+  "geradoEm": "2026-10-02T18:29:10.581Z",
+  "execucoes": [
+    {
+      "id": "R14",
+      "modelo": "chatgpt",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R09",
+      "modelo": "chatgpt",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R06",
+      "modelo": "chatgpt",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R05",
+      "modelo": "chatgpt",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R11",
+      "modelo": "chatgpt",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R04",
+      "modelo": "claude",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R01",
+      "modelo": "claude",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 0.8,
+      "recall": 1,
+      "f1": 0.888888888888889
+    },
+    {
+      "id": "R07",
+      "modelo": "claude",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R13",
+      "modelo": "claude",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R08",
+      "modelo": "claude",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R03",
+      "modelo": "gemini",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R15",
+      "modelo": "gemini",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R02",
+      "modelo": "gemini",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R12",
+      "modelo": "gemini",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R10",
+      "modelo": "gemini",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR01-01",
+        "PR01-02",
+        "PR01-03",
+        "PR01-04"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    }
+  ],
+  "porModelo": [
+    {
+      "modelo": "chatgpt",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    },
+    {
+      "modelo": "claude",
+      "execucoes": 5,
+      "precision": {
+        "media": 0.96,
+        "desvio": 0.08944271909999157
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 0.9777777777777779,
+        "desvio": 0.0496903994999953
+      },
+      "tp": 20,
+      "fp": 1,
+      "fn": 0,
+      "micro": {
+        "precision": 0.9523809523809523,
+        "recall": 1,
+        "f1": 0.975609756097561
+      }
+    },
+    {
+      "modelo": "gemini",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    }
+  ],
+  "porDefeito": [
+    {
+      "defeito": "PR01-01",
+      "titulo": "Verificação de ISBN condicionada também ao título",
+      "dificuldade": "Média",
+      "categoria": "Consulta / integridade",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR01-02",
+      "titulo": "Persistência realizada antes de todas as validações",
+      "dificuldade": "Alta",
+      "categoria": "Efeito colateral / ordem de execução",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR01-03",
+      "titulo": "Cliente consegue definir a disponibilidade inicial",
+      "dificuldade": "Média",
+      "categoria": "Estado / mass assignment",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR01-04",
+      "titulo": "Validação de quantidade baseada apenas em truthiness",
+      "dificuldade": "Baixa",
+      "categoria": "JavaScript / validação",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+{
+  "pr": "PR02",
+  "geradoEm": "2026-10-06T18:45:00.859Z",
+  "execucoes": [
+    {
+      "id": "R04",
+      "modelo": "chatgpt",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R12",
+      "modelo": "chatgpt",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R10",
+      "modelo": "chatgpt",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R01",
+      "modelo": "chatgpt",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R06",
+      "modelo": "chatgpt",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R14",
+      "modelo": "claude",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R11",
+      "modelo": "claude",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R13",
+      "modelo": "claude",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R03",
+      "modelo": "claude",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R08",
+      "modelo": "claude",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R15",
+      "modelo": "gemini",
+      "execucao": 1,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R05",
+      "modelo": "gemini",
+      "execucao": 2,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R07",
+      "modelo": "gemini",
+      "execucao": 3,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R02",
+      "modelo": "gemini",
+      "execucao": 4,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    {
+      "id": "R09",
+      "modelo": "gemini",
+      "execucao": 5,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "desconsiderados": 0,
+      "detectados": [
+        "PR02-02",
+        "PR02-03",
+        "PR02-04",
+        "PR02-05"
+      ],
+      "parciais": [],
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    }
+  ],
+  "porModelo": [
+    {
+      "modelo": "chatgpt",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    },
+    {
+      "modelo": "claude",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    },
+    {
+      "modelo": "gemini",
+      "execucoes": 5,
+      "precision": {
+        "media": 1,
+        "desvio": 0
+      },
+      "recall": {
+        "media": 1,
+        "desvio": 0
+      },
+      "f1": {
+        "media": 1,
+        "desvio": 0
+      },
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "micro": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      }
+    }
+  ],
+  "porDefeito": [
+    {
+      "defeito": "PR02-02",
+      "titulo": "Regra de atualização reutilizada incorretamente na criação",
+      "dificuldade": "Média",
+      "categoria": "Regra copiada / validação de unicidade",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR02-03",
+      "titulo": "Usuário salvo antes da validação",
+      "dificuldade": "Alta",
+      "categoria": "Estado parcial / ordem de execução",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR02-04",
+      "titulo": "Validação rejeita somente quando nome e e-mail são inválidos ao mesmo tempo",
+      "dificuldade": "Baixa",
+      "categoria": "Lógica booleana",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    },
+    {
+      "defeito": "PR02-05",
+      "titulo": "Verificação de duplicidade baseada em listagem paginada",
+      "dificuldade": "Alta",
+      "categoria": "Consulta / arquitetura",
+      "modelos": {
+        "chatgpt": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "claude": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        },
+        "gemini": {
+          "sequencia": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "deteccoes": 5,
+          "frequencia": 1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Implementação da funcionalidade de consulta ao acervo (RF03), com o endpoint GET /books/search?q= (pesquisar livros por título ou autor).

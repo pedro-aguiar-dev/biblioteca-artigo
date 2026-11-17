@@ -11,4 +11,4 @@ Esta pasta reúne a documentação consolidada solicitada ao encerramento do exp
 | `DETECCAO-POR-DEFEITO.csv` | frequência por defeito e modelo |
 | `originais/` | cópias dos dois PDFs originalmente fornecidos |
 
-Os dados brutos e os documentos de revisão permanecem em `../biblioteca-experimento`; eles não foram duplicados para preservar uma única fonte de verdade. O código final está neste repositório no commit `a9ea606`.
+Os dados brutos, os documentos de revisão e os scripts de reprodução estão em `../experimento`. O código final está neste repositório no commit `a9ea606`.

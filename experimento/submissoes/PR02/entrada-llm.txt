@@ -1,0 +1,220 @@
+Atue como revisor de código.
+
+Analise o Pull Request abaixo considerando os requisitos e regras de negócio fornecidos.
+
+Identifique defeitos funcionais introduzidos pelas alterações. Considere como defeito apenas algo que possa gerar comportamento incorreto ou violar um requisito.
+
+Não reporte questões de estilo, nomenclatura ou refatorações opcionais.
+
+O Pull Request pode conter zero ou mais defeitos.
+
+Para cada defeito encontrado, informe:
+- localização;
+- descrição do problema;
+- comportamento esperado;
+- comportamento atual;
+- requisito relacionado.
+
+Requisitos da funcionalidade:
+RF02 Cadastrar usuário: o sistema deve permitir o cadastro de usuários.
+- CA06 Um usuário com nome e e-mail válidos deve ser armazenado.
+- CA07 O e-mail deve ser obrigatório e único.
+- CA08 Nome vazio ou e-mail inválido deve causar a rejeição do cadastro.
+- CA09 Uma tentativa inválida não deve criar parcialmente o usuário.
+
+RF07 Atualizar e-mail de usuário: o sistema deve permitir alterar o e-mail de um usuário existente.
+- CA33 O novo e-mail deve ser válido.
+- CA34 O e-mail deve continuar único: não pode pertencer a outro usuário (manter o próprio e-mail é permitido).
+- CA35 A atualização de um usuário inexistente deve ser rejeitada.
+- CA36 Uma atualização rejeitada não deve alterar os dados do usuário.
+
+Regras de negócio aplicáveis:
+- RN08 Uma operação rejeitada não pode modificar os dados do sistema.
+
+Modelo de dados (Usuário): identificador, nome e e-mail.
+
+Descrição do Pull Request:
+Implementação das funcionalidades de cadastro de usuários (RF02) e de atualização de e-mail (RF07), com os endpoints POST /users (cadastrar usuário), GET /users (listar usuários, com paginação) e PATCH /users/:id/email (atualizar e-mail).
+
+Diff:
+diff --git a/src/app.js b/src/app.js
+index f5d73ed..12bb11b 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -3,16 +3,22 @@ import { AppError } from "./shared/app-error.js";
+ import { BookRepository } from "./books/book.repository.js";
+ import { BookService } from "./books/book.service.js";
+ import { createBookRouter } from "./books/book.routes.js";
++import { UserRepository } from "./users/user.repository.js";
++import { UserService } from "./users/user.service.js";
++import { createUserRouter } from "./users/user.routes.js";
+ 
+ export function createApp() {
+   const bookRepository = new BookRepository();
+   const bookService = new BookService(bookRepository);
++  const userRepository = new UserRepository();
++  const userService = new UserService(userRepository);
+ 
+   const app = express();
+ 
+   app.use(express.json());
+ 
+   app.use("/books", createBookRouter(bookService));
++  app.use("/users", createUserRouter(userService));
+ 
+   app.use(handleError);
+ 
+diff --git a/src/users/user.repository.js b/src/users/user.repository.js
+new file mode 100644
+index 0000000..7e58f30
+--- /dev/null
++++ b/src/users/user.repository.js
+@@ -0,0 +1,35 @@
++export class UserRepository {
++  #users = [];
++  #nextId = 1;
++
++  async findAll({ page, size }) {
++    const start = page * size;
++    return this.#users.slice(start, start + size);
++  }
++
++  async findById(id) {
++    return this.#users.find((user) => user.id === id) ?? null;
++  }
++
++  async findByEmail(email) {
++    return this.#users.find((user) => user.email === email) ?? null;
++  }
++
++  async save(user) {
++    if (user.id === undefined) {
++      const createdUser = { ...user, id: this.#nextId++ };
++      this.#users.push(createdUser);
++      return createdUser;
++    }
++
++    const index = this.#users.findIndex((storedUser) => storedUser.id === user.id);
++
++    if (index === -1) {
++      this.#users.push(user);
++    } else {
++      this.#users[index] = user;
++    }
++
++    return user;
++  }
++}
+diff --git a/src/users/user.routes.js b/src/users/user.routes.js
+new file mode 100644
+index 0000000..b6ef642
+--- /dev/null
++++ b/src/users/user.routes.js
+@@ -0,0 +1,29 @@
++import { Router } from "express";
++
++export function createUserRouter(userService) {
++  const router = Router();
++
++  router.post("/", async (req, res) => {
++    const user = await userService.createUser(req.body ?? {});
++    res.status(201).json(user);
++  });
++
++  router.get("/", async (req, res) => {
++    const users = await userService.listUsers({
++      page: toNumber(req.query.page),
++      size: toNumber(req.query.size),
++    });
++    res.json(users);
++  });
++
++  router.patch("/:id/email", async (req, res) => {
++    const user = await userService.updateEmail(Number(req.params.id), req.body ?? {});
++    res.json(user);
++  });
++
++  return router;
++}
++
++function toNumber(value) {
++  return value === undefined ? undefined : Number(value);
++}
+diff --git a/src/users/user.service.js b/src/users/user.service.js
+new file mode 100644
+index 0000000..db6105c
+--- /dev/null
++++ b/src/users/user.service.js
+@@ -0,0 +1,72 @@
++import { AppError } from "../shared/app-error.js";
++
++const DEFAULT_PAGE_SIZE = 20;
++const MAX_PAGE_SIZE = 100;
++
++export class UserService {
++  constructor(userRepository) {
++    this.userRepository = userRepository;
++  }
++
++  async createUser(input) {
++    const { name, email } = input;
++
++    const existingUser = await this.userRepository.findByEmail(email);
++
++    if (existingUser && existingUser.id === input.id) {
++      throw new AppError("EMAIL_ALREADY_EXISTS", 409);
++    }
++
++    const user = await this.userRepository.save({ name, email });
++
++    if (isBlank(name) && !isValidEmail(email)) {
++      throw new AppError("INVALID_USER");
++    }
++
++    return user;
++  }
++
++  async updateEmail(id, input) {
++    const { email } = input;
++
++    const user = await this.userRepository.findById(id);
++
++    if (!user) {
++      throw new AppError("USER_NOT_FOUND", 404);
++    }
++
++    if (!isValidEmail(email)) {
++      throw new AppError("INVALID_EMAIL");
++    }
++
++    const users = await this.userRepository.findAll({ page: 0, size: 100 });
++    const emailInUse = users.some((other) => other.email === email && other.id !== user.id);
++
++    if (emailInUse) {
++      throw new AppError("EMAIL_ALREADY_EXISTS", 409);
++    }
++
++    user.email = email;
++    return this.userRepository.save(user);
++  }
++
++  async listUsers({ page = 0, size = DEFAULT_PAGE_SIZE } = {}) {
++    if (!Number.isInteger(page) || page < 0) {
++      throw new AppError("INVALID_PAGINATION");
++    }
++
++    if (!Number.isInteger(size) || size < 1 || size > MAX_PAGE_SIZE) {
++      throw new AppError("INVALID_PAGINATION");
++    }
++
++    return this.userRepository.findAll({ page, size });
++  }
++}
++
++function isBlank(value) {
++  return typeof value !== "string" || value.trim() === "";
++}
++
++function isValidEmail(value) {
++  return typeof value === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
++}

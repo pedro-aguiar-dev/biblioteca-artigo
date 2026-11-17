@@ -1,0 +1,141 @@
+{
+  "pr": "PR02",
+  "classificado_por": "assistente (Claude), às cegas — mapa-cego.json não consultado",
+  "data": "2026-10-02",
+  "protocolo": "coleta/protocolo-analise.md (versão fixada em 2026-10-01)",
+  "revisao_pesquisador": {
+    "data": "2026-10-06",
+    "resultado": "Pesquisador informou revisão concluída ('feito'); revisao-PR02.docx sem nenhuma decisão escrita (60 achados, todas as células em branco = concorda). Nenhuma alteração."
+  },
+  "respostas": {
+    "R01": {
+      "observacao": "A seção 'Trechos críticos' reapresenta os achados 1 a 3 (PR02-02, PR02-03 e PR02-04); não é achado novo.",
+      "achados": [
+        { "n": 1, "trecho": "No cadastro, input.id normalmente é undefined, enquanto o usuário já existente possui um id numérico. Assim, mesmo que findByEmail(email) encontre outro usuário, a condição tende a ser falsa. (...) Um segundo usuário pode ser cadastrado com um e-mail já existente.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (condição compara existingUser.id com input.id, indefinido na criação) e o efeito (e-mail duplicado aceito no cadastro)." },
+        { "n": 2, "trecho": "A validação combina os dois erros com &&. Isso só rejeita o cadastro quando nome e e-mail são inválidos ao mesmo tempo. (...) name=\"\" com e-mail válido é aceito; nome válido com e-mail inválido ou ausente também é aceito.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (nome vazio ou e-mail inválido isolado é aceito)." },
+        { "n": 3, "trecho": "O usuário é persistido antes da validação dos dados. Quando nome vazio e e-mail inválido fazem a validação lançar AppError, o registro já permanece no repositório.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (tentativa rejeitada deixa o usuário gravado)." },
+        { "n": 4, "trecho": "A verificação de unicidade durante atualização consulta apenas os primeiros 100 usuários. (...) é possível alterar o e-mail para um valor já pertencente, por exemplo, ao usuário 101, criando duplicidade.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (unicidade verificada só em findAll({ page: 0, size: 100 })) e o efeito (e-mail de usuário fora dos 100 primeiros aceito na atualização)." }
+      ]
+    },
+    "R02": {
+      "achados": [
+        { "n": 1, "trecho": "A operação de escrita no banco (this.userRepository.save) está sendo chamada antes da validação da validade do nome e do e-mail. Se os dados forem inválidos, a exceção será lançada, mas o registro já terá sido persistido no repositório.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (tentativa rejeitada deixa o usuário gravado)." },
+        { "n": 2, "trecho": "A lógica para barrar e-mails duplicados está com a condição incorreta: if (existingUser && existingUser.id === input.id). Como um novo cadastro não possui um id prévio no input, essa verificação sempre falhará", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id, indefinido na criação) e o efeito (múltiplos usuários com o mesmo e-mail)." },
+        { "n": 3, "trecho": "A validação de campos utiliza incorretamente o operador lógico && (E) na instrução if (isBlank(name) && !isValidEmail(email)). (...) Cadastros com nome vazio e e-mail válido (ou vice-versa) são indevidamente aceitos.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 4, "trecho": "Para verificar se o novo e-mail já pertence a outro usuário, o código realiza uma busca restrita à primeira página de paginação do repositório (this.userRepository.findAll({ page: 0, size: 100 })).", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (busca só na primeira página de 100) e o efeito (duplicidade aceita com mais de 100 usuários)." }
+      ]
+    },
+    "R03": {
+      "observacao": "A seção final 'Sem defeitos identificados em' lista pontos verificados sem defeito; não é achado.",
+      "achados": [
+        { "n": 1, "trecho": "o userRepository.save({ name, email }) é chamado antes da verificação de nome/e-mail. Quando a validação falha, o usuário já foi inserido no repositório e o #nextId já foi incrementado; o erro lançado não desfaz a escrita.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário inválido armazenado apesar do erro)." },
+        { "n": 2, "trecho": "o cadastro só é rejeitado quando o nome está vazio e o e-mail é inválido simultaneamente. Cada condição isolada passa.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita, inclusive e-mail ausente)." },
+        { "n": 3, "trecho": "no cadastro, input.id é undefined (...), enquanto existingUser.id é sempre um número atribuído pelo repositório. A comparação é sempre falsa, então o 409 nunca é lançado. A condição correta seria apenas if (existingUser).", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (usuários com o mesmo e-mail criados normalmente)." },
+        { "n": 4, "trecho": "a checagem de duplicidade é feita sobre uma página fixa do repositório em vez de uma busca direta por e-mail (findByEmail, que já existe). Usuários fora dessa primeira página não entram na comparação.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (página fixa de 100) e o efeito (duplicidade aceita a partir do 101º usuário)." }
+      ]
+    },
+    "R04": {
+      "observacao": "O parágrafo final explica a interação entre os achados 2 e 3 (com apenas um campo inválido nem há rejeição; com ambos, a rejeição vem depois do save); não é achado novo.",
+      "achados": [
+        { "n": 1, "trecho": "A comparação com input.id faz com que, normalmente, o conflito não seja detectado, pois o usuário sendo criado ainda não possui ID. (...) Um segundo usuário pode ser cadastrado com um e-mail já existente.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (e-mail duplicado aceito)." },
+        { "n": 2, "trecho": "A validação usa &&, portanto rejeita somente quando nome e e-mail são inválidos simultaneamente. (...) Um usuário com nome vazio e e-mail válido é aceito; da mesma forma, um usuário com nome válido e e-mail ausente/inválido é aceito.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 3, "trecho": "O usuário é persistido antes de validar nome e e-mail. Quando ambos são inválidos, a validação lança erro somente depois de o registro já ter sido criado.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário inválido permanece armazenado)." },
+        { "n": 4, "trecho": "A verificação de unicidade na atualização examina somente os primeiros 100 usuários. Se houver mais de 100 cadastrados, um e-mail pertencente a um usuário fora desse intervalo não será encontrado.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (verificação limitada aos 100 primeiros) e o efeito (duplicidade aceita na atualização)." }
+      ]
+    },
+    "R05": {
+      "achados": [
+        { "n": 1, "trecho": "A lógica para verificar se o e-mail já existe valida se existingUser.id === input.id. Como em uma operação de criação o input.id é indefinido, a condição será falsa e o erro EMAIL_ALREADY_EXISTS nunca será lançado", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (múltiplos usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "A validação dos dados de entrada utiliza o operador lógico && (isBlank(name) && !isValidEmail(email)). (...) Se apenas um deles for inválido, o cadastro é aceito.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 3, "trecho": "A persistência no repositório (await this.userRepository.save(...)) é chamada antes da validação que verifica se o nome está em branco ou se o e-mail é inválido.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário armazenado em operação rejeitada)." },
+        { "n": 4, "trecho": "Para verificar se o novo e-mail já está em uso, o sistema busca apenas os primeiros 100 usuários (await this.userRepository.findAll({ page: 0, size: 100 })) em vez de buscar pelo e-mail específico.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (busca só nos 100 primeiros) e o efeito (atualização para e-mail já existente aceita)." }
+      ]
+    },
+    "R06": {
+      "achados": [
+        { "n": 1, "trecho": "a condição só rejeita o cadastro quando o usuário encontrado pelo e-mail possui o mesmo id recebido em input.id. Em um cadastro normal, input.id não existe, enquanto existingUser.id é numérico.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (segundo usuário com o mesmo e-mail)." },
+        { "n": 2, "trecho": "foi usado &&, portanto a operação só é rejeitada quando nome e e-mail são inválidos simultaneamente. (...) { name: \"\", email: \"user@example.com\" } (...) { name: \"User\", email: \"invalid-email\" }", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 3, "trecho": "a chamada a save ocorre antes da validação. Quando nome e e-mail são ambos inválidos, a API lança erro, mas o usuário já foi inserido no repositório.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário criado parcialmente em tentativa rejeitada)." },
+        { "n": 4, "trecho": "a verificação de unicidade consulta somente os primeiros 100 usuários. Se o proprietário do e-mail estiver a partir do 101º registro, ele não será encontrado.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (findAll limitado a 100) e o efeito (duplicidade na atualização)." }
+      ]
+    },
+    "R07": {
+      "achados": [
+        { "n": 1, "trecho": "A condição de bloqueio de e-mail duplicado (if (existingUser && existingUser.id === input.id)) é logicamente falha para um cenário de criação. Como os dados de entrada para criação não possuem id, a condição sempre será falsa se o e-mail existir", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (múltiplos usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "A chamada this.userRepository.save({ name, email }) ocorre antes da validação que verifica se o nome está em branco ou se o e-mail é válido.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (registro incorreto criado e depois o erro)." },
+        { "n": 3, "trecho": "A validação utiliza o operador && (if (isBlank(name) && !isValidEmail(email))). (...) Enviar apenas um nome vazio ou apenas um e-mail inválido resulta em sucesso.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 4, "trecho": "Para verificar se o novo e-mail já está em uso, o código busca apenas a primeira página do repositório (this.userRepository.findAll({ page: 0, size: 100 })) em vez de buscar o e-mail em toda a base (usando findByEmail).", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (só a primeira página) e o efeito (duplicidade não detectada além dos 100 primeiros)." }
+      ]
+    },
+    "R08": {
+      "observacao": "A seção final 'Pontos verificados sem defeito' não contém achados. (O texto desta resposta aparece todo em negrito por causa da cópia; o conteúdo não é afetado.)",
+      "achados": [
+        { "n": 1, "trecho": "no cadastro, input.id é sempre undefined (o id é gerado pelo repositório). Como existingUser.id é sempre um número, a comparação é sempre falsa e a exceção EMAIL_ALREADY_EXISTS jamais é lançada.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (dois usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "o usuário é gravado antes da validação. Quando a validação falha, o erro é lançado, mas o registro já foi inserido no repositório (e o id já foi consumido), ficando visível em GET /users.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário inválido permanece)." },
+        { "n": 3, "trecho": "a rejeição só ocorre quando ambos os campos são inválidos. Basta um deles estar correto para o cadastro passar. (...) nome válido + e-mail inválido ou ausente (undefined) → aceito", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 4, "trecho": "a verificação percorre apenas os 100 primeiros usuários retornados pela paginação. A partir do 101º registro, um e-mail já utilizado não é detectado.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (paginação de 100) e o efeito (duplicidade aceita na atualização)." }
+      ]
+    },
+    "R09": {
+      "achados": [
+        { "n": 1, "trecho": "Como no momento da criação o input normalmente não possui id (ou ele será diferente de um usuário já salvo), a condição existingUser.id === input.id será falsa e o erro nunca será lançado.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (usuários criados com e-mails já existentes)." },
+        { "n": 2, "trecho": "O código salva o usuário no repositório antes de executar a validação de nome e e-mail. Se a validação falhar na linha seguinte, o erro será lançado para o cliente, mas o dado inválido já terá sido salvo no sistema.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário inválido armazenado)." },
+        { "n": 3, "trecho": "O uso do operador && (E) exige que ambos os campos estejam inválidos ao mesmo tempo para que o cadastro seja barrado.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (usuário sem nome ou com e-mail inválido cadastrado)." },
+        { "n": 4, "trecho": "Para checar se o novo e-mail já está em uso, o sistema busca apenas a primeira página de usuários (limitado a 100 registros). Caso o e-mail duplicado pertença ao 101º usuário em diante, o sistema não o detectará.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (limite de 100 registros) e o efeito (duplicidade aceita)." }
+      ]
+    },
+    "R10": {
+      "observacao": "A frase final afirma que os demais fluxos de updateEmail estão corretos; não é achado.",
+      "achados": [
+        { "n": 1, "trecho": "No cadastro, input.id não é usado para criar o usuário e normalmente será undefined. Portanto, quando já existe um usuário com o mesmo e-mail, existingUser.id === input.id será falso e o cadastro continuará.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (múltiplos usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "A validação usa &&, portanto só rejeita quando nome e e-mail são inválidos simultaneamente. Cada condição deveria ser suficiente para rejeitar o cadastro.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 3, "trecho": "O usuário é persistido antes de verificar se os dados são válidos. Mesmo quando a validação posterior lança AppError, o registro já permanece no repositório.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário permanece após erro)." },
+        { "n": 4, "trecho": "A verificação de unicidade na atualização considera somente os primeiros 100 usuários. (...) um e-mail pertencente a um usuário fora dessa primeira página não será detectado.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (primeiros 100 usuários) e o efeito (duplicidade aceita a partir do 101º)." }
+      ]
+    },
+    "R11": {
+      "observacao": "A seção final 'Pontos verificados sem defeito' não contém achados.",
+      "achados": [
+        { "n": 1, "trecho": "A condição compara existingUser.id com input.id. No cadastro, input é o corpo da requisição, que não possui id (undefined), enquanto existingUser.id é sempre um número gerado pelo repositório. A comparação é sempre falsa", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (múltiplos usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "A gravação acontece antes de qualquer validação de nome e e-mail. Quando a validação falha, a exceção é lançada, mas o usuário já foi inserido no repositório e o id já foi consumido. Não há rollback.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário inválido em GET /users)." },
+        { "n": 3, "trecho": "O cadastro só é rejeitado quando o nome está vazio e o e-mail é inválido simultaneamente. Cada condição isolada deveria ser suficiente para rejeitar.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita e armazenada)." },
+        { "n": 4, "trecho": "A checagem de e-mail já em uso é feita sobre uma página fixa de no máximo 100 registros, em vez de consultar o repositório pelo e-mail (findByEmail (...)). Usuários a partir da posição 101 não são considerados na verificação.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (página fixa de 100) e o efeito (e-mails duplicados na atualização)." }
+      ]
+    },
+    "R12": {
+      "observacao": "A seção 'Exemplos que demonstram os defeitos' ilustra os achados 1 a 3, e a frase final diz não haver violação de CA33, CA35 ou CA36; não são achados novos.",
+      "achados": [
+        { "n": 1, "trecho": "No cadastro normal, input.id tende a ser undefined; portanto, mesmo que findByEmail(email) encontre outro usuário, a condição normalmente será falsa.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (vários usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "A validação usa &&, exigindo que nome e e-mail sejam inválidos simultaneamente para rejeitar o cadastro.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 3, "trecho": "O usuário é persistido antes de verificar a validade de nome/e-mail. (...) Quando nome e e-mail são inválidos, save() cria o usuário e somente depois AppError(\"INVALID_USER\") é lançado.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário fica cadastrado apesar do erro)." },
+        { "n": 4, "trecho": "A verificação de unicidade na atualização considera apenas os primeiros 100 usuários do repositório. (...) Se o proprietário do e-mail estiver a partir do 101º registro, emailInUse será falso", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (primeiros 100 usuários) e o efeito (outro usuário assume o mesmo e-mail)." }
+      ]
+    },
+    "R13": {
+      "observacao": "A seção final 'Pontos verificados sem defeito' não contém achados.",
+      "achados": [
+        { "n": 1, "trecho": "O save é executado antes da verificação de nome/e-mail. Quando a validação falha e o AppError é lançado, o usuário já foi inserido no repositório e recebeu um id, permanecendo na base.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário listável via GET /users apesar do erro)." },
+        { "n": 2, "trecho": "A rejeição só ocorre quando ambas as condições são inválidas. Entradas com apenas um dos campos inválidos passam na validação.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (nome vazio ou e-mail inválido/ausente cadastrado)." },
+        { "n": 3, "trecho": "No cadastro, input.id é sempre undefined (o id é gerado pelo repositório), enquanto existingUser.id é sempre um número. A comparação é sempre falsa, portanto a exceção EMAIL_ALREADY_EXISTS nunca é lançada.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (dois usuários com o mesmo e-mail)." },
+        { "n": 4, "trecho": "A checagem de duplicidade é feita sobre uma página fixa em vez de consultar o e-mail diretamente (há findByEmail disponível no repositório). Usuários fora dessa primeira página não são considerados.", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (página fixa) e o efeito (duplicidade aceita com mais de 100 usuários)." }
+      ]
+    },
+    "R14": {
+      "observacao": "A 'Observação sobre o que não é defeito' no fim não contém achados.",
+      "achados": [
+        { "n": 1, "trecho": "No cadastro, input.id é sempre undefined (...). Já existingUser.id é sempre um número atribuído pelo repositório. A comparação existingUser.id === input.id é, portanto, sempre falsa", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (dois ou mais usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "O usuário é gravado no repositório e só depois os dados são validados. Quando a validação falha, a exceção é lançada, mas o registro já foi inserido em #users e permanece lá", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (usuário inválido persiste)." },
+        { "n": 3, "trecho": "A rejeição só acontece quando ambas as condições são verdadeiras. Um cadastro com nome vazio e e-mail válido, ou com nome válido e e-mail inválido (inclusive ausente), passa pela validação sem erro.", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 4, "trecho": "A unicidade é verificada apenas sobre a primeira página de 100 registros, em vez de consultar o repositório pelo e-mail (findByEmail, que já existe).", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (primeira página de 100) e o efeito (e-mails duplicados na atualização)." }
+      ]
+    },
+    "R15": {
+      "achados": [
+        { "n": 1, "trecho": "A verificação de e-mail duplicado está condicionada a existingUser.id === input.id. Como no cadastro o input.id não costuma existir (é gerado no repositório), essa condição será falsa, burlando a verificação.", "classificacao": "TP", "defeito": "PR02-02", "parcial": false, "justificativa": "Aponta a causa (comparação com input.id) e o efeito (múltiplos usuários com o mesmo e-mail)." },
+        { "n": 2, "trecho": "A chamada this.userRepository.save({ name, email }) é executada antes das validações de formato de nome e e-mail.", "classificacao": "TP", "defeito": "PR02-03", "parcial": false, "justificativa": "Aponta a causa (save antes da validação) e o efeito (registro criado indevidamente e mantido após o erro)." },
+        { "n": 3, "trecho": "A validação utiliza o operador lógico && (isBlank(name) && !isValidEmail(email)). (...) Permite criar usuário com nome vazio (desde que o e-mail seja válido) ou com e-mail inválido (desde que o nome não seja vazio).", "classificacao": "TP", "defeito": "PR02-04", "parcial": false, "justificativa": "Aponta a causa (&& em vez de ||) e o efeito (invalidade isolada aceita)." },
+        { "n": 4, "trecho": "A checagem para garantir que o novo e-mail não pertence a outro usuário busca apenas a primeira página de usuários (findAll({ page: 0, size: 100 })).", "classificacao": "TP", "defeito": "PR02-05", "parcial": false, "justificativa": "Aponta a causa (só a primeira página) e o efeito (duplicidade quando o dono do e-mail está fora dos 100 primeiros)." }
+      ]
+    }
+  }
+}
